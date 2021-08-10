@@ -4,15 +4,12 @@
         const data = helper.extractFormData(event.target);
         
         // set these values to defaults if needed
-        if(data['state'] === undefined) data['state'] = 'N/A';
-        if(data['city'] === undefined) data['city'] = 'N/A';
         if(data['company'] === undefined) data['company'] = 'N/A';
         
         let createLeadAction = component.get('c.createLead');
         createLeadAction.setCallback(this, function(response) {
             if(response.getState() === "SUCCESS") {
-                // fire component action success
-            	console.log(response.getReturnValue());
+                component.set('v.submittedSuccessfully', response.getReturnValue());
         	} else {
             	console.log('failed?', response.getReturnValue());                           
             }
@@ -28,5 +25,9 @@
     toggleCompany: function(component, event, helper) {
     	const showCompany = component.get("v.showCompany");
         component.set('v.showCompany', !showCompany);
-	}
+	},
+    closeModal: function(component, event, helper) {
+        console.log('fired!');
+        component.set('v.isOpen', false);
+    }
 })
