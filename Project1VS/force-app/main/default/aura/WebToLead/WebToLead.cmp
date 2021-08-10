@@ -1,0 +1,75 @@
+<aura:component controller="WebToLeadController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >  
+	
+    <!-- submission related -->
+    <aura:attribute name="submittedSuccessfully" type="Boolean" default="false" />
+    <aura:attribute name="errorMessage" type="String" default="" />
+    
+    <!-- dynamic form related -->
+    <aura:attribute name="showLocation" type="Boolean" default="false" />
+    <aura:attribute name="showCompany" type="Boolean" default="false" />
+    
+    <div class="body-container">
+        <div class="card-wrapper">
+            <lightning:card class="slds-p-around_medium" title="Interested?">
+                <p class="slds-p-horizontal_small">
+            		If you would like to become a new player, or perhaps even a dungeon master,
+                    provide your information here and we will be in touch!
+        		</p>
+                <hr />
+                <form onsubmit="{! c.submitForm }" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+
+                    <!--  **********************************************************************  -->
+                    <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+                    <!--  these lines if you wish to test in debug mode.                          -->
+                    <!--  <input type="hidden" name="debug" value=1>                              -->
+                    <!--  <input type="hidden" name="debugEmail"                                  -->
+                    <!--  value="zackary.frazier@revature.net">                                   -->
+                    <!--  **********************************************************************  -->
+                   
+                    <lightning:input required="true" id="first_name" label="First Name" maxlength="40" name="first_name" size="20" type="text" />
+                    <lightning:input required="true" label="Last Name" id="last_name" maxlength="80" name="last_name" size="20" type="text" />
+                    <lightning:input required="true" label="Email" id="email" maxlength="80" name="email" size="20" type="text" />
+                    
+                    <!-- show location checkbox -->
+                    <div class="slds-form-element">
+                      <div class="slds-form-element__control">
+                        <div class="slds-checkbox">
+                          <input type="checkbox" id="show-location" checked="{! v.showLocation }" onclick="{! c.toggleLocation }"/>
+                          <label class="slds-checkbox__label" for="show-location">
+                            <span class="slds-checkbox_faux"></span>
+                            <span class="slds-form-element__label">Provide Location?</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <aura:renderIf isTrue="{! v.showLocation }">
+                        <lightning:input required="{! v.showLocation }" label="City" id="city" maxlength="40" name="city" size="20" type="text" />
+                    	<lightning:input required="{! v.showLocation }" label="State/Province" id="state" maxlength="20" name="state" size="20" type="text" />
+                    </aura:renderIf>
+                    
+                    <!-- show company checkbox -->
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                                <input type="checkbox" id="show-company" checked="{! v.showCompany }" onclick="{! c.toggleCompany }"/>
+                                <label class="slds-checkbox__label" for="show-company">
+                                    <span class="slds-checkbox_faux"></span>
+                                    <span class="slds-form-element__label">Provide Company?</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <aura:renderIf isTrue="{! v.showCompany }">
+                    	<lightning:input required="{! v.showCompany }" label="Company" id="company" maxlength="40" name="company" size="20" type="text" />
+                    </aura:renderIf>
+                    
+                    <div class="submit-wrapper">
+                    	<lightning:button class="submit" type="submit" name="submit">Submit</lightning:button>
+                    </div>
+                </form>
+            </lightning:card> 
+        </div>
+    </div>
+</aura:component>
