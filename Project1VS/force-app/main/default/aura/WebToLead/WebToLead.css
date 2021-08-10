@@ -245,3 +245,8 @@
 .THIS .card-bg-color {
     background-color: #bbb;
 }
+
+.THIS .hr-small-margin {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

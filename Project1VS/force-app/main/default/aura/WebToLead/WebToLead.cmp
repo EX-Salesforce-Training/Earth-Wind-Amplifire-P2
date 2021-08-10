@@ -13,6 +13,10 @@
     
     <c:SuccessModal isOpen="{! v.submittedSuccessfully}" />
     
+    <!-- error modal -->
+    <c:ErrorModal isOpen="{! v.errorMessage != '' }">
+        {! v.errorMessage }
+    </c:ErrorModal>
     
     
     <div class="body-container">
@@ -22,8 +26,8 @@
             		If you would like to become a new player, or perhaps even a dungeon master,
                     provide your information here and we will be in touch!
         		</p>
-                <hr />
-                <form onsubmit="{! c.submitForm }" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+                <hr class="hr-small-margin" />
+                <form onsubmit="{! c.submitForm }">
 
                     <!--  **********************************************************************  -->
                     <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
@@ -51,8 +55,8 @@
                     </div>
                     
                     <aura:renderIf isTrue="{! v.showLocation }">
-                        <lightning:input required="{! v.showLocation }" label="City" id="city" maxlength="40" name="city" size="20" type="text" />
-                    	<lightning:input required="{! v.showLocation }" label="State/Province" id="state" maxlength="20" name="state" size="20" type="text" />
+                        <lightning:input label="City" id="city" maxlength="40" name="city" size="20" type="text" />
+                    	<lightning:input label="State/Province" id="state" maxlength="20" name="state" size="20" type="text" />
                     </aura:renderIf>
                     
                     <!-- show company checkbox -->

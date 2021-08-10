@@ -9,11 +9,18 @@
         let createLeadAction = component.get('c.createLead');
         createLeadAction.setCallback(this, function(response) {
             if(response.getState() === "SUCCESS") {
-                component.set('v.submittedSuccessfully', response.getReturnValue());
+                let wasCreated = response.getReturnValue();
+                component.set('v.submittedSuccessfully', wasCreated);
+                if(!wasCreated) {
+                    if(!/@.+\.(.+)/.test(data['email'])) {
+                        component.set('v.errorMessage', 'Failed, invalid email address');
+                    } else {
+                        component.set('v.errorMessage', 'Failed, double-check your form submission');
+                    }
+                }
         	} else {
-            	console.log('failed?', response.getReturnValue());                           
-            }
-                                       
+                component.set('v.errorMessage', 'Failed, unexpected server error')
+            }                           
         });
         createLeadAction.setParams(data);
         $A.enqueueAction(createLeadAction);
@@ -27,7 +34,7 @@
         component.set('v.showCompany', !showCompany);
 	},
     closeModal: function(component, event, helper) {
-        console.log('fired!');
         component.set('v.isOpen', false);
+        component.set('v.errorMessage', '');
     }
 })
