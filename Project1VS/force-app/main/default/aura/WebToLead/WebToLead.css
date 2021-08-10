@@ -9,12 +9,7 @@
 	width: 100%;
 	margin: 0;
 	padding: 0;
-    
 	font-size: 100%;
-
-	line-height:1.6;
-
-	color:#111;
 	background-color:#DdDdDd;
 }
 
@@ -216,6 +211,9 @@
 }
 
 /* Zack's contribution */
+.THIS html {
+    background-color:#DdDdDd;
+}
 
 .THIS.body-container {
     margin: 5% 15%;
@@ -235,4 +233,15 @@
 
 .THIS .submit {
 	margin-top: 1rem;
+    background-color: #ddd;
+    transition: background-color 0.25s;
+}
+
+.THIS .submit:hover {
+    background-color: white;
+    transition: background-color 0.25s;
+}
+
+.THIS .card-bg-color {
+    background-color: #bbb;
 }

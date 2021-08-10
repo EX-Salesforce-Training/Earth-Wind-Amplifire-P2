@@ -11,6 +11,7 @@
         let createLeadAction = component.get('c.createLead');
         createLeadAction.setCallback(this, function(response) {
             if(response.getState() === "SUCCESS") {
+                // fire component action success
             	console.log(response.getReturnValue());
         	} else {
             	console.log('failed?', response.getReturnValue());                           
