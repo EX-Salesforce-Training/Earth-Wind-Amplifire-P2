@@ -1,0 +1,68 @@
+<aura:component controller="partyController" implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="parties" type="Party__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.fillParties}"/>
+    <aura:attribute name="currentParty" type="Party__c"/>
+    <aura:attribute name="characters" type="Character__c[]"/>
+    <aura:attribute name="campaign" type="DnDCampaign__c"/>
+    <div class="slds-page-header">                                 
+        <h1 class="slds-page-header__title">Party List</h1>                                  
+    </div>
+    <table class="slds-table slds-table_bordered slds-table_col-bordered">
+        <thead><tr><th>Party Name</th></tr></thead>
+        <tbody>           
+            <aura:iteration items="{!v.parties}" var="party">
+                <tr>
+                    <td>
+                        <lightning:button variant="base" label="{!party.Name}" onclick="{!c.displayParty}" value="{!party}"/>
+                    </td>
+                </tr>
+            </aura:iteration>            
+        </tbody>
+    </table>
+    <aura:if isTrue="{!v.currentParty}">
+        <div class="slds-page-header">                                 
+            <h1 class="slds-page-header__title">Party Info: {!v.currentParty.Name}</h1>                                  
+        </div>
+        <table class="slds-table slds-table_bordered slds-table_col-bordered">
+            <thead>
+                <!--tr><th>Party Info</th></tr-->
+                <tr>
+                    <th>Players</th>
+                    <th>Characters</th>
+                </tr>
+            </thead>
+            <tbody>           
+                <aura:iteration items="{!v.characters}" var="character">
+                    <tr>
+                        <td class="slds-size_1-of-2">
+                            <a href="{!'/' + character.User__c}">{!character.User__r.Name}</a>
+                            <!--lightning:button variant="base" label="{!character.User__r.Name}"/-->
+                        </td>
+                        <td class="slds-size_1-of-2">
+                            <a href="{!'/' + character.Id}">{!character.Name}</a>
+                            <!--lightning:button variant="base" label="{!character.Name}"/-->
+                        </td>
+                        
+                    </tr>
+                </aura:iteration>            
+            </tbody>
+        </table>
+    	<table class="slds-table slds-table_bordered slds-table_col-bordered">
+            <thead>
+                <tr>
+                    <th>Dungeon Master</th>
+                    <th>Campaign</th>
+                </tr>
+            </thead>
+            <tbody>           
+                <tr>
+                    <td class="slds-size_1-of-2">
+                        <a href="{!'/' + v.campaign.Dungeon_Master__c}">{!v.campaign.Dungeon_Master__r.Name}</a>
+                        <!--lightning:button variant="base" label="{!v.campaign.Dungeon_Master__r.Name}"/-->
+                    </td>
+                    <td class="slds-size_1-of-2">{!v.campaign.Campaign_Name__c}</td>                  
+                </tr>          
+            </tbody>
+        </table>
+    </aura:if>
+</aura:component>
