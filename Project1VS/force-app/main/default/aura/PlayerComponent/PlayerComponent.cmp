@@ -1,0 +1,93 @@
+<aura:component controller="PlayerAura" >
+    <aura:attribute name="partyList" type="Character__c[]"/>
+    <aura:attribute name="User" type="User"/>
+    <aura:attribute name="Race" type="String[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.Party}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.User}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.Race}"/>
+    <div>
+        <p>Name: {!v.User.Name}</p>
+        <p>Username: {!v.User.Username}</p>
+        <p>Email: {!v.User.Email}</p>
+        <p>Region: {!v.User.Region}</p>
+    </div>
+    <br/><br/>
+    <div class="slds-p-around_medium" >
+        <lightning:recordEditForm objectApiName="Character__c" >
+            <lightning:messages />
+            
+            <div style="padding-left:2rem;padding-top:6.75rem;position:relative;">
+                <a href="#" aria-describedby="help" onmouseover="{!c.toggleRaceTooltip}" onmouseout="{!c.toggleRaceTooltip}" id="race-tooltip">
+                    <span class="slds-icon_container slds-icon-utility-info">
+                        <lightning:icon iconName="utility:info"/>
+                        <span class="slds-assistive-text"></span>
+                    </span>
+                </a>
+                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left ishidden" role="tooltip" id="help" style="position:absolute;top:-4px;left:15px;z-index:1"  aura:id="race-tooltip">
+                    <div class="slds-popover__body">The available races are: Dragonborn, Dwarf, Elf, Gnome, Half-Elf, Half-Orc, Halfling, Human, Tiefling 
+                        <div class="slds-m-top_x-small" aria-hidden="true">
+                            <span class="slds-icon_container slds-icon-utility-info" title="Help">
+                                <lightning:icon iconName="utility:info"/>
+                                <span class="slds-assistive-text"></span>
+                            </span></div>
+                    </div>
+                </div>
+            </div>
+            <lightning:inputField fieldName="Race__c"/>
+            <lightning:inputField fieldName="Name"/>
+            <div style="padding-left:2rem;padding-top:6.75rem;position:relative;">
+                <a href="#" aria-describedby="help" onmouseover="{!c.toggleClassTooltip}" onmouseout="{!c.toggleClassTooltip}" id="class-tooltip">
+                    <span class="slds-icon_container slds-icon-utility-info">
+                        <lightning:icon iconName="utility:info"/>
+                        <span class="slds-assistive-text"></span>
+                    </span>
+                </a>
+                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left ishidden" role="tooltip" id="help" style="position:absolute;top:-4px;left:15px;z-index:1"  aura:id="class-tooltip">
+                    <div class="slds-popover__body">The available classes are: Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard
+                        <div class="slds-m-top_x-small" aria-hidden="true">
+                            <span class="slds-icon_container slds-icon-utility-info" title="Help">
+                                <lightning:icon iconName="utility:info"/>
+                                <span class="slds-assistive-text"></span>
+                            </span></div>
+                    </div>
+                </div>
+            </div>
+            <lightning:inputField fieldName="Class__c"/>
+            <div style="padding-left:2rem;padding-top:6.75rem;position:relative;">
+                <a href="#" aria-describedby="help" onmouseover="{!c.toggleAttributesTooltip}" onmouseout="{!c.toggleAttributesTooltip}" id="attributes-tooltip">
+                    <span class="slds-icon_container slds-icon-utility-info">
+                        <lightning:icon iconName="utility:info"/>
+                        <span class="slds-assistive-text"></span>
+                    </span>
+                </a>
+                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left ishidden" role="tooltip" id="help" style="position:absolute;top:-4px;left:15px;z-index:1"  aura:id="attributes-tooltip">
+                    <div class="slds-popover__body">The stats should be 1-20
+                        <div class="slds-m-top_x-small" aria-hidden="true">
+                            <span class="slds-icon_container slds-icon-utility-info" title="Help">
+                                <lightning:icon iconName="utility:info"/>
+                                <span class="slds-assistive-text"></span>
+                            </span></div>
+                    </div>
+                </div>
+            </div>
+            <lightning:inputField fieldName="Strength__c"/>
+            <lightning:inputField fieldName="Constitution__c"/>
+            <lightning:inputField fieldName="Dexterity__c"/>
+            <lightning:inputField fieldName="Wisdom__c"/>
+            <lightning:inputField fieldName="Intelligence__c"/>
+            <lightning:inputField fieldName="Charisma__c"/>
+            <lightning:inputField fieldName="General_Notes__c"/>    
+            <lightning:button type="submit"
+                              name="Submit"
+                              label="Create Character" class="slds-m-top_medium"/>
+        </lightning:recordEditForm>
+    </div>
+    <br/><br/>
+    <aura:iteration items="{!v.partyList}" var="party">
+        <p>Character Name</p>
+        <div>{!party.Name}</div>
+        <p>Party</p>
+        <div>{!party.Party__r.Name}</div>
+        <br/>
+    </aura:iteration>
+</aura:component>
