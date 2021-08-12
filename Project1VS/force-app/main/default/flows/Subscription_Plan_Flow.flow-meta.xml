@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <assignments>
+        <name>Assign_Annual</name>
+        <label>Assign Annual</label>
+        <locationX>661</locationX>
+        <locationY>187</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Expiration_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>One_Year_From_Now</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Monthly</name>
+        <label>Assign Monthly</label>
+        <locationX>657</locationX>
+        <locationY>462</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Expiration_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>One_Month_From_Now</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Determine_Based_On_Subscription_Type</name>
+        <label>Determine Based On Subscription Type</label>
+        <locationX>426</locationX>
+        <locationY>312</locationY>
+        <defaultConnector>
+            <targetReference>Assign_Monthly</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_annual</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Product__r.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Annual Subscription</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Annual</targetReference>
+            </connector>
+            <label>is annual</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Should_Set_Expiration_Date</name>
+        <label>Should Set Expiration Date</label>
+        <locationX>93</locationX>
+        <locationY>423</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>has_product_but_no_date</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Product__c</leftValueReference>
+                <operator>WasSet</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Product__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Expiration_Date__c</leftValueReference>
+                <operator>EqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Determine_Based_On_Subscription_Type</targetReference>
+            </connector>
+            <label>has product but no date</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <name>One_Month_From_Now</name>
+        <dataType>Date</dataType>
+        <expression>DATE(
+  YEAR(TODAY()),
+  MONTH(TODAY()) + 1,
+  DAY(TODAY())
+)</expression>
+    </formulas>
+    <formulas>
+        <name>One_Year_From_Now</name>
+        <dataType>Date</dataType>
+        <expression>DATE(
+  YEAR(TODAY()) + 1, 
+  MONTH(TODAY()),
+  DAY(TODAY())
+)</expression>
+    </formulas>
+    <interviewLabel>Subscription Plan Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Subscription Plan Flow Update/Create</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Should_Set_Expiration_Date</targetReference>
+        </connector>
+        <object>Subscription_Plan__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Todays_Date</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <elementReference>$Flow.CurrentDate</elementReference>
+        </value>
+    </variables>
+</Flow>
