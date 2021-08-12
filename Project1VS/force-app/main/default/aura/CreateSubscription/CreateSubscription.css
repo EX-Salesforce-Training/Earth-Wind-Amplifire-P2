@@ -1,0 +1,65 @@
+.THIS {
+}
+
+.THIS.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.THIS .card {
+    width: 40vw;
+    padding: 1rem;
+}
+
+.THIS .tab {
+    padding: 0.35rem;
+}
+
+.THIS .button-highlight {
+    background-color: #227C9D;
+    border: white;
+}
+
+.THIS .is-hidden {
+    display: none;
+}
+
+.THIS .submit-button {
+    margin: 0.35rem;
+}
+
+.THIS.notification {
+   	position: fixed;
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    top: 5vh;
+    left: 40vw;
+    width: 20vw;
+    color: white;
+    z-index: 1;
+    border-radius: 16px;
+    padding: 1rem;
+    transition: opacity 0.5s;
+}
+
+.THIS.notification-success {
+    background-color: #64A671;
+}
+
+.THIS.notification-error {
+    background-color: #DF2935;
+}
+
+.THIS.is-hidden-notification {
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.5s;
+}
+
+.THIS .exit-button {
+    color: white;
+    cursor: pointer;
+}
