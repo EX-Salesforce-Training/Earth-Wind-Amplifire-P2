@@ -47,6 +47,16 @@
         
         $A.enqueueAction(createAction);
     },
+    // @desc : when a user first navigates to this page, retrieve their subscription info
+    retrieveSubscriptionPlan: function(component, event, helper) {
+    	const retrievalAction = component.get('c.retrieveCurrentUserSubPlan');
+        retrievalAction.setCallback(this, function(response) {
+            if(response.getState() === 'SUCCESS') {
+                component.set('v.subPlan', response.getReturnValue());
+            }
+        });
+        $A.enqueueAction(retrievalAction);
+    },
     highlight: function(component, event, helper) {
         const btnElement = component.find(event.target.id);
         $A.util.addClass(btnElement, 'slds-button_brand');

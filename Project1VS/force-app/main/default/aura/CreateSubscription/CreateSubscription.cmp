@@ -4,6 +4,9 @@
 	
     <aura:attribute name="successMessage" type="String" default='' />    
     <aura:attribute name="errorMessage" type="String" default='' />
+    <aura:attribute name="subPlan" type="Subscription_Plan__c" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.retrieveSubscriptionPlan}"/>
     
     <div aura:id="success-notification" class="notification notification-success is-hidden-notification">
         <p> {! v.successMessage } </p>
@@ -51,6 +54,7 @@
             <div id="edit-form" aura:id="edit-form" class="tab is-hidden">
                 <form onsubmit="{! c.editSub }">
                     <abbr>Modify your current subscription plan</abbr>
+                    
                     <lightning:select label='Subscription' name='editSubName'>
                         <option>Annual Subscription ($250)</option>
                         <option>Monthly Subscription ($25)</option>

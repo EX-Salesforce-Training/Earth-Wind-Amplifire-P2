@@ -12,9 +12,32 @@ public class CreateSubscriptionController {
             return false;
         }
         
+        Date expirationDate;
+        switch on subscriptionName {
+            when 'Annual Subscription' {
+                DateTime oneYearFromNowAsDateTime = System.now().addYears(1);
+                Date oneYearFromNowAsDate = Date.newInstance(
+                    oneYearFromNowAsDateTime.year(), 
+                    oneYearFromNowAsDateTime.month(), 
+                	oneYearFromNowAsDateTime.day());
+                
+                expirationDate = oneYearFromNowAsDate;
+            }
+            when 'Monthly Subscription' {
+                DateTime oneMonthFromNowAsDateTime = System.now().addMonths(1);
+                Date oneMonthFromNowAsDate = Date.newInstance(
+                    oneMonthFromNowAsDateTime.year(), 
+                    oneMonthFromNowAsDateTime.month(), 
+                	oneMonthFromNowAsDateTime.day());
+                
+                expirationDate = oneMonthFromNowAsDate;
+            }
+        }
+        
         Subscription_Plan__c plan = new Subscription_Plan__c(
         	user__c = userId,
-            Product__c = subId
+            Product__c = subId,
+            Expiration_Date__c = expirationDate
         );
         
         try {
@@ -26,7 +49,7 @@ public class CreateSubscriptionController {
         }
     }
     
-    // @desc: create a new subscription plan for the current user
+    // @desc: edit a subscription plan for the current user
     @AuraEnabled
     public static Boolean editSubscriptionPlanForCurrentUser(String subscriptionName) {
         ID userId = UserInfo.getUserId();
@@ -54,6 +77,18 @@ public class CreateSubscriptionController {
         } catch(Exception e) {
             System.debug(e);
             return false;
+        }
+    }
+    
+    // @desc: retrieve the current user's subscription plan, return to JS controller
+    @AuraEnabled
+    public static Subscription_Plan__c retrieveCurrentUserSubPlan() {
+        try {
+            String userId = UserInfo.getUserId();
+            Subscription_Plan__c plan = [SELECT Expiration_Date__c, Cancelled_Subscription__c FROM Subscription_Plan__c WHERE User__C = :userId ];
+        	return plan;
+        } catch(Exception e) {
+            return null;
         }
     }
 }
