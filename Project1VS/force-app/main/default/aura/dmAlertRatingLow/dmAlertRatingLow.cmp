@@ -21,9 +21,9 @@
         <lightning:layout horizontalAlign="center">
             <lightning:layoutItem padding="around-small">
                 <div class="header-column">
-                    <p class="field-title" title="Field 1"><b>Users</b></p>
+                    <p class="field-title" title="Field 1"><b>Players</b></p>
                     <aura:iteration items="{!v.PlayerList}" var="user">
-                        <lightning:card footer="Player" title="User Card">
+                        <lightning:card footer="{!user.User_Type__c}" title="User Card">
                             <aura:set attribute="actions">
                             </aura:set>
                             <p class="slds-p-horizontal_small">
@@ -36,7 +36,7 @@
             </lightning:layoutItem>
             <lightning:layoutItem padding="around-small">
                  <p class="field-title" title="Field 1"><b></b></p>
-                <p style="text-align:center;"><b>Update User Rating if Needed</b></p>
+                <p style="text-align:center;"><b>Update Player Rating if Needed</b></p>
                 <br/>
                 <aura:iteration items="{!v.PlayerList}" var="user">
                 <lightning:recordEditForm objectApiName="User" recordId="{!user.Id}">
@@ -65,9 +65,9 @@
          <lightning:layoutItem padding="around-small">
              <aura:if isTrue="{!v.isPlayer}">
                 <div class="header-column">
-                    <p class="field-title" title="Field 1"></p>
+                    <p class="field-title" title="Field 1"><b>Dungeon Master</b></p>
                     <aura:iteration items="{!v.DMList}" var="user">
-                        <lightning:card footer="DM" title="User Card">
+                        <lightning:card footer="{!user.User_Type__c}" title="User Card">
                             <aura:set attribute="actions">
                             </aura:set>
                             <p class="slds-p-horizontal_small">
@@ -80,9 +80,11 @@
              </aura:if>
             </lightning:layoutItem>
         <lightning:layoutItem padding="around-small">
-                 <p class="field-title" title="Field 1"><b></b></p>
-                <p style="text-align:center;"><b></b></p>
+                 <p class="field-title" title="Field 2"><b></b></p>
+            <aura:if isTrue="{!v.isPlayer}">
+                <p><b>Update DM Rating if Needed</b></p>
                 <br/>
+                </aura:if>
                 <aura:iteration items="{!v.DMList}" var="user">
                 <lightning:recordEditForm objectApiName="User" recordId="{!user.Id}">
                     <lightning:messages></lightning:messages>
