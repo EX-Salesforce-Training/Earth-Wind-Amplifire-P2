@@ -27,20 +27,6 @@
             </value>
         </assignmentItems>
     </assignments>
-    <assignments>
-        <name>Set_Product_Null</name>
-        <label>Set Product Null</label>
-        <locationX>626</locationX>
-        <locationY>623</locationY>
-        <assignmentItems>
-            <assignToReference>$Record.Expiration_Date__c</assignToReference>
-            <operator>Assign</operator>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>$Record.Product__c</assignToReference>
-            <operator>Assign</operator>
-        </assignmentItems>
-    </assignments>
     <decisions>
         <name>If_Annual_Subscription</name>
         <label>If Annual Subscription</label>
@@ -70,7 +56,7 @@
         <name>Should_Clear</name>
         <label>Should Clear</label>
         <locationX>332</locationX>
-        <locationY>629</locationY>
+        <locationY>627</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>is_not_renewing</name>
@@ -82,8 +68,15 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.Expiration_Date__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Todays_Date</elementReference>
+                </rightValue>
+            </conditions>
             <connector>
-                <targetReference>Set_Product_Null</targetReference>
+                <targetReference>Delete_Subscription_Plan</targetReference>
             </connector>
             <label>is not renewing</label>
         </rules>
@@ -100,20 +93,6 @@
         <rules>
             <name>is_renewable</name>
             <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>$Record.Product__c</leftValueReference>
-                <operator>WasSet</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record.Product__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
             <conditions>
                 <leftValueReference>$Record.Expiration_Date__c</leftValueReference>
                 <operator>EqualTo</operator>
@@ -153,7 +132,7 @@
 )</expression>
     </formulas>
     <interviewLabel>Subscription Plan Flow {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Subscription Plan Flow</label>
+    <label>Subscription Plan Flow Scheduled</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -173,6 +152,13 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordDeletes>
+        <name>Delete_Subscription_Plan</name>
+        <label>Delete Subscription Plan</label>
+        <locationX>601</locationX>
+        <locationY>526</locationY>
+        <inputReference>$Record</inputReference>
+    </recordDeletes>
     <start>
         <locationX>49</locationX>
         <locationY>50</locationY>
