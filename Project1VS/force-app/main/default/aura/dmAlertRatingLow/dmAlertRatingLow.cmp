@@ -1,0 +1,58 @@
+<aura:component controller="playerAlertAura" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="userList" type="User[]"/>
+    <aura:attribute name="ishidden" type="boolean" default="false"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.User}"/>
+    <div>
+        <p style="text-align:center;"><b>--------------------------------</b></p>
+        <p style="text-align:center;"><b>| User Ratings Component |</b></p>
+        <p style="text-align:center;"><b>--------------------------------</b></p>
+    </div>
+    <br/>
+    <div class="c-container">
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="Field 1"><b>Users</b></p>
+                    <aura:iteration items="{!v.userList}" var="user">
+                        <lightning:card footer="Player" title="User Card">
+                            <aura:set attribute="actions">
+                            </aura:set>
+                            <p class="slds-p-horizontal_small">
+                                <p>Name: {!user.Name}</p>
+                                <p>User Rating: {!user.User_Rating__c}</p>
+                            </p>
+                        </lightning:card>
+                    </aura:iteration>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+            <div class = "header-column">
+                 <p class="field-title" title="Field 1"><b></b></p>
+                <p style="text-align:center;"><b>Update User Rating if Needed</b></p>
+                <br/>
+                <aura:iteration items="{!v.userList}" var="user">
+                <lightning:recordEditForm objectApiName="User" recordId="{!user.Id}">
+                    <lightning:messages></lightning:messages>
+                    <lightning:inputField fieldName="User_Rating__c"></lightning:inputField>
+                    <aura:if isTrue="{!v.ishidden}">
+                        <lightning:inputField fieldName="Username"></lightning:inputField>
+                        <lightning:inputField fieldName="LastName"></lightning:inputField>
+                        <lightning:inputField fieldName="Email"></lightning:inputField>
+                        <lightning:inputField fieldName="Alias"></lightning:inputField>
+                        <lightning:inputField fieldName="TimeZoneSidKey"></lightning:inputField>
+                        <lightning:inputField fieldName="EmailEncodingKey"></lightning:inputField>
+                        <lightning:inputField fieldName="LanguageLocaleKey"></lightning:inputField>
+                        <lightning:inputField fieldName="LocaleSidId"></lightning:inputField>
+                    </aura:if>
+                    <div class="slds-align_absolute-center slds-p-around_medium">
+                        <lightning:button class="slds-m-around_xx-small" label="Update" type="Submit"></lightning:button>
+                    </div>
+                </lightning:recordEditForm>
+                </aura:iteration>
+                </div>
+            <br/>
+            </lightning:layoutItem>
+        </lightning:layout>     
+    </div>
+</aura:component>

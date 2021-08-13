@@ -5,14 +5,39 @@
     <aura:handler name="init" value="{!this}" action="{!c.Party}"/>
     <aura:handler name="init" value="{!this}" action="{!c.User}"/>
     <aura:handler name="init" value="{!this}" action="{!c.Race}"/>
+    
     <div>
-        <p>Name: {!v.User.Name}</p>
-        <p>Username: {!v.User.Username}</p>
-        <p>Email: {!v.User.Email}</p>
-        <p>Region: {!v.User.Region}</p>
+        <p style="text-align:center;"><b>-----------------------------------</b></p>
+        <p style="text-align:center;"><b>| User Characters Component |</b></p>
+        <p style="text-align:center;"><b>-----------------------------------</b></p>
+    </div>
+    <br/>
+    <div>
+        <p style="text-align:center;">Name: {!v.User.Name}</p>
+        <p style="text-align:center;">Username: {!v.User.Username}</p>
+        <p style="text-align:center;">Email: {!v.User.Email}</p>
+        <p style="text-align:center;">Region: {!v.User.Region}</p>
     </div>
     <br/><br/>
-    <div class="slds-p-around_medium" >
+    <div class="c-container">
+        <lightning:layout horizontalAlign="space" >
+            <lightning:layoutItem padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="Field 1"><b>Characters</b></p>
+                    <br/>
+                    <aura:iteration items="{!v.partyList}" var="party">
+                        <p>Character Name</p>
+                        <div>{!party.Name}</div>
+                        <p>Party</p>
+                        <div>{!party.Party__r.Name}</div>
+                        <br/>
+                    </aura:iteration>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="Field 1"><b>Create a Character</b></p>
+                    <div class="slds-p-around_medium" >
         <lightning:recordEditForm objectApiName="Character__c" >
             <lightning:messages />
             
@@ -76,18 +101,15 @@
             <lightning:inputField fieldName="Wisdom__c"/>
             <lightning:inputField fieldName="Intelligence__c"/>
             <lightning:inputField fieldName="Charisma__c"/>
+            <lightning:inputField fieldName="Party__c"/>
             <lightning:inputField fieldName="General_Notes__c"/>    
             <lightning:button type="submit"
                               name="Submit"
                               label="Create Character" class="slds-m-top_medium"/>
         </lightning:recordEditForm>
     </div>
-    <br/><br/>
-    <aura:iteration items="{!v.partyList}" var="party">
-        <p>Character Name</p>
-        <div>{!party.Name}</div>
-        <p>Party</p>
-        <div>{!party.Party__r.Name}</div>
-        <br/>
-    </aura:iteration>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
 </aura:component>
