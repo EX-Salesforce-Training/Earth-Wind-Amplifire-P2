@@ -8,31 +8,33 @@
     <aura:handler event="force:refreshView" action="{!c.isRefreshed}" />
     
     <div>
-        <p style="text-align:center;"><b>-----------------------------------</b></p>
-        <p style="text-align:center;"><b>| User Characters Component |</b></p>
-        <p style="text-align:center;"><b>-----------------------------------</b></p>
+        <div class="container">
+            <img class="image" src="{!$Resource.dnddice}"/>
+            <div class="overlay">
+            	<div class="text"><p><b>Player Characters</b></p></div>
+            </div>
+        </div>
     </div>
-    <br/>
-    <div>
+    <div >
         <p style="text-align:center;">Name: {!v.User.Name}</p>
         <p style="text-align:center;">Username: {!v.User.Username}</p>
         <p style="text-align:center;">Email: {!v.User.Email}</p>
         <p style="text-align:center;">Region: {!v.User.Region}</p>
     </div>
-    <br/><br/>
     <div class="c-container">
         <lightning:layout horizontalAlign="space" >
             <lightning:layoutItem padding="around-small">
                 <div class="header-column">
                     <p class="field-title" title="Field 1"><b>Characters</b></p>
                     <br/>
+                    <div class="scroll">
                     <aura:iteration items="{!v.partyList}" var="party">
                         <p>Character Name</p>
                         <div>{!party.Name}</div>
                         <p>Party</p>
                         <div>{!party.Party__r.Name}</div>
-                        <br/>
                     </aura:iteration>
+                    </div>
                 </div>
             </lightning:layoutItem>
             <lightning:layoutItem padding="around-small">
@@ -106,7 +108,7 @@
             <lightning:inputField fieldName="General_Notes__c"/>    
             <lightning:button type="submit"
                               name="Submit"
-                              label="Create Character" class="slds-m-top_medium"
+                              label="Create Character" class="button"
                               onclick="{!c.isRefreshed}"/>
         </lightning:recordEditForm>
     </div>

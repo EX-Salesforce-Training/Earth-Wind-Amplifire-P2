@@ -12,12 +12,14 @@
     <aura:handler event="force:refreshView" action="{!c.isRefreshed}" />
     
     <div>
-        <p style="text-align:center;"><b>--------------------------------</b></p>
-        <p style="text-align:center;"><b>| User Ratings Component |</b></p>
-        <p style="text-align:center;"><b>--------------------------------</b></p>
+        <div class="container">
+            <img class="image" src="{!$Resource.dnddice}"/>
+            <div class="overlay">
+            	<div class="text"><p><b>User Ratings</b></p></div>
+            </div>
+        </div>
     </div>
-    <br/>
-    <div class="c-container">
+    <div class="c-contain">
         <lightning:layout horizontalAlign="center">
             <lightning:layoutItem padding="around-small">
                 <div class="header-column">
@@ -31,7 +33,7 @@
                                 <p>User Rating: {!user.User_Rating__c}</p>
                             </p>
                         </lightning:card>
-                    </aura:iteration>
+                    </aura:iteration>   
                 </div>
             </lightning:layoutItem>
             <lightning:layoutItem padding="around-small">
@@ -53,7 +55,7 @@
                         <lightning:inputField fieldName="LocaleSidId"></lightning:inputField>
                     </aura:if>
                     <div class="slds-align_absolute-center slds-p-around_medium">
-                        <lightning:button class="slds-m-around_xx-small" label="Update" type="Submit" onclick="{!c.isRefreshed}"></lightning:button>
+                        <lightning:button class="button" label="Update" type="Submit" onclick="{!c.isRefreshed}"></lightning:button>
                     </div>
                 </lightning:recordEditForm>
                 </aura:iteration>
@@ -103,7 +105,7 @@
                     </aura:if>
                     <aura:if isTrue="{!v.ishiddendm}">
                     <div class="slds-align_absolute-center slds-p-around_medium">
-                        <lightning:button class="slds-m-around_xx-small" label="Update" type="Submit" onclick="{!c.isRefreshed}"></lightning:button>
+                        <lightning:button label="Update" type="Submit" onclick="{!c.isRefreshed}" class="button"></lightning:button>
                     </div>
                     </aura:if>
                 </lightning:recordEditForm>
