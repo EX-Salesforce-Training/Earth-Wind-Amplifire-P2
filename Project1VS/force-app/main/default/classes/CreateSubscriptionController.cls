@@ -51,25 +51,22 @@ public class CreateSubscriptionController {
     
     // @desc: edit a subscription plan for the current user
     @AuraEnabled
-    public static Boolean editSubscriptionPlanForCurrentUser(String subscriptionName) {
+    public static Boolean editSubscriptionPlanForCurrentUser(Boolean isCancelling) {
         ID userId = UserInfo.getUserId();
         Subscription_Plan__c userSubPlan;
-        ID subId;
+        
         try {
-        	userSubPlan = [SELECT Product__c FROM Subscription_Plan__c WHERE User__c = :userId];
+        	userSubPlan = [SELECT Cancelled_Subscription__c, Product__c FROM Subscription_Plan__c WHERE User__c = :userId];
         } catch(QueryException e) {
             System.debug('User does not have a subscription');
             return false;
         }
         
-        try {
-            subId = [SELECT Id FROM Product2 WHERE Name = :subscriptionName].Id;
-        } catch(QueryException e) {
-            System.debug('A subscription of that name does not exist');
+        if(userSubPlan.Product__c == null) {
             return false;
         }
         
-        userSubPlan.Product__c = subId;
+        userSubPlan.Cancelled_Subscription__c = isCancelling;
         
         try {
             update userSubPlan;

@@ -53,16 +53,30 @@
             <!-- edit a plan tab -->
             <div id="edit-form" aura:id="edit-form" class="tab is-hidden">
                 <form onsubmit="{! c.editSub }">
-                    <abbr>Modify your current subscription plan</abbr>
+                    <p>Modify your current subscription plan.</p>
                     
-                    <lightning:select label='Subscription' name='editSubName'>
-                        <option>Annual Subscription ($250)</option>
-                        <option>Monthly Subscription ($25)</option>
-                    </lightning:select>
                     
-                    <lightning:button type="submit" class="submit-button">
-                        Submit
-                    </lightning:button>
+                    <aura:if isTrue="{! and(not(v.subPlan == null), not(v.subPlan.Cancelled_Subscription__c)) }">
+                    	<p style="margin-top: 0.5rem;">Your subscription expires on {! v.subPlan.Expiration_Date__c }.
+                        	By cancelling you are ending your automatic renewal, and your access will be revoked on
+                            that date.
+                        </p>
+                        
+                        <lightning:button type="submit" class="submit-button">
+                        	Cancel Subscription
+                        </lightning:button>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{! and(not(v.subPlan == null), v.subPlan.Cancelled_Subscription__c) }">
+                        <lightning:button type="submit" class="submit-button">
+                            Enable Subscription
+                        </lightning:button>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{! v.subPlan == null }">
+                        <p>You do not have a current subscription with us.</p>
+                    </aura:if>
+                    
                 </form>
             </div>
 

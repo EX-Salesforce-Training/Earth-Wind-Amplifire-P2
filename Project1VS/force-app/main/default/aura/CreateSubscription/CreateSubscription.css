@@ -36,8 +36,8 @@
     display: grid;
     grid-template-columns: 9fr 1fr;
     top: 5vh;
-    left: 40vw;
-    width: 20vw;
+    left: 35vw;
+    width: 30vw;
     color: white;
     z-index: 1;
     border-radius: 16px;

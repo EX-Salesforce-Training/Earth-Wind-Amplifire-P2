@@ -27,16 +27,18 @@
         
         
         const createAction = component.get('c.editSubscriptionPlanForCurrentUser');
-        
-        const data = Array.from(new FormData(event.target).entries())
-        .reduce((acc, [key, value]) => [acc[key] = value, acc][1], {});
-        const params = { subscriptionName: data['editSubName'].split(' (')[0] };
+      	let subPlan = component.get('v.subPlan')
+        const isCancelling = !subPlan.Cancelled_Subscription__c;
+        const params = { isCancelling };
         
         createAction.setParams(params);
         createAction.setCallback(this, function(response) {
             if(response.getState() === 'SUCCESS') {
                 if(response.getReturnValue()) {
                     helper.toggleSuccessMessage(component, 'Success! You have edited your subscription.');
+                    subPlan.Cancelled_Subscription__c = isCancelling;
+                    component.set('v.subPlan', subPlan);
+                    
                 } else {
 					helper.toggleErrorMessage(component, 'Error! Something went wrong.');                    
                 }
@@ -84,5 +86,5 @@
     },
     closeSuccessNotification: function(component, event, helper) {
         $A.util.addClass(component.find('success-notification'), 'is-hidden-notification');
-    }
+    },
 })
