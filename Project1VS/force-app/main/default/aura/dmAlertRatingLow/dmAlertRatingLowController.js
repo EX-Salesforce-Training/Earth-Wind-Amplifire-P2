@@ -40,5 +40,9 @@
         })
         $A.enqueueAction(userinfo);
     },
+    	handleSuccess: function(component, event, helper) {
+            console.log("fire");
+        $A.get('e.force:refreshView').fire();
+    },
 
 })

@@ -51,7 +51,7 @@
                         <lightning:inputField fieldName="LocaleSidId"></lightning:inputField>
                     </aura:if>
                     <div class="slds-align_absolute-center slds-p-around_medium">
-                        <lightning:button class="slds-m-around_xx-small" label="Update" type="Submit"></lightning:button>
+                        <lightning:button class="slds-m-around_xx-small" label="Update" type="Submit" onclick="{!c.handleSuccess}"></lightning:button>
                     </div>
                 </lightning:recordEditForm>
                 </aura:iteration>
