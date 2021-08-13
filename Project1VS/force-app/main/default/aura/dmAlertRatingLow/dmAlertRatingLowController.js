@@ -40,9 +40,17 @@
         })
         $A.enqueueAction(userinfo);
     },
-    	handleSuccess: function(component, event, helper) {
-            console.log("fire");
-        $A.get('e.force:refreshView').fire();
+    	save : function(component,event,helper){
+        
+        var action = component.get("c.apexSave"); 
+        action.setCallback(this, function(action) {                
+           $A.get('e.force:refreshView').fire(); 
+        }); 
+        $A.enqueueAction(action); 
     },
 
+    /*page refresh after data save*/    
+    isRefreshed: function(component, event, helper) {
+        location.reload();
+    },
 })

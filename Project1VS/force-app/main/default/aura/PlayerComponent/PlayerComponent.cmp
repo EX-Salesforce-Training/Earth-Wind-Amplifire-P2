@@ -5,6 +5,7 @@
     <aura:handler name="init" value="{!this}" action="{!c.Party}"/>
     <aura:handler name="init" value="{!this}" action="{!c.User}"/>
     <aura:handler name="init" value="{!this}" action="{!c.Race}"/>
+    <aura:handler event="force:refreshView" action="{!c.isRefreshed}" />
     
     <div>
         <p style="text-align:center;"><b>-----------------------------------</b></p>
@@ -105,7 +106,8 @@
             <lightning:inputField fieldName="General_Notes__c"/>    
             <lightning:button type="submit"
                               name="Submit"
-                              label="Create Character" class="slds-m-top_medium"/>
+                              label="Create Character" class="slds-m-top_medium"
+                              onclick="{!c.isRefreshed}"/>
         </lightning:recordEditForm>
     </div>
                 </div>

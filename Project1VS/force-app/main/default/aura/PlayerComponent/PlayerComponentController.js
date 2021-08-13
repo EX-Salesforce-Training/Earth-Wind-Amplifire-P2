@@ -43,5 +43,18 @@
 	},
     toggleClassTooltip : function(cmp, evt, hlp) {
         hlp.toggleTooltip(cmp, "class-tooltip");
-	}
+	},
+    	save : function(component,event,helper){
+        
+        var action = component.get("c.apexSave"); 
+        action.setCallback(this, function(action) {                
+           $A.get('e.force:refreshView').fire(); 
+        }); 
+        $A.enqueueAction(action); 
+    },
+
+    /*page refresh after data save*/    
+    isRefreshed: function(component, event, helper) {
+        location.reload();
+    },
  })

@@ -9,6 +9,8 @@
     <aura:handler name="init" value="{!this}" action="{!c.DMUser}"/>
     <aura:handler name="init" value="{!this}" action="{!c.PlayerUser}"/>
     <aura:handler name="init" value="{!this}" action="{!c.userinfo}"/>
+    <aura:handler event="force:refreshView" action="{!c.isRefreshed}" />
+    
     <div>
         <p style="text-align:center;"><b>--------------------------------</b></p>
         <p style="text-align:center;"><b>| User Ratings Component |</b></p>
@@ -51,7 +53,7 @@
                         <lightning:inputField fieldName="LocaleSidId"></lightning:inputField>
                     </aura:if>
                     <div class="slds-align_absolute-center slds-p-around_medium">
-                        <lightning:button class="slds-m-around_xx-small" label="Update" type="Submit" onclick="{!c.handleSuccess}"></lightning:button>
+                        <lightning:button class="slds-m-around_xx-small" label="Update" type="Submit" onclick="{!c.isRefreshed}"></lightning:button>
                     </div>
                 </lightning:recordEditForm>
                 </aura:iteration>
@@ -99,7 +101,7 @@
                     </aura:if>
                     <aura:if isTrue="{!v.ishiddendm}">
                     <div class="slds-align_absolute-center slds-p-around_medium">
-                        <lightning:button class="slds-m-around_xx-small" label="Update" type="Submit"></lightning:button>
+                        <lightning:button class="slds-m-around_xx-small" label="Update" type="Submit" onclick="{!c.isRefreshed}"></lightning:button>
                     </div>
                     </aura:if>
                 </lightning:recordEditForm>
