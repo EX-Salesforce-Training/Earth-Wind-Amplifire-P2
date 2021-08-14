@@ -5,6 +5,9 @@
  	width: 50%;
   	border: 3px solid #DF0000;
   	padding: 10px;
+    animation-name: loading;
+  	animation-duration: 2s;
+    animation-timing-function: ease-in-out;
 }
 .THIS .text{
    color: #DF0000;
@@ -65,3 +68,7 @@
   	height: 250px;
     overflow: scroll;
 }
+@keyframes loading {
+  from  {background-color:red;}
+  to  {background-color:yellow;}
+  }
