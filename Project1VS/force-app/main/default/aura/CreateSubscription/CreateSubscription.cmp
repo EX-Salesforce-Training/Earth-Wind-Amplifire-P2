@@ -1,0 +1,86 @@
+<aura:component controller="CreateSubscriptionController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="createSubName" type="String" default="Annual Subscription ($250)" />
+    <aura:attribute name="editSubName" type="String" default="Annual Subscription ($250)" />
+	
+    <aura:attribute name="successMessage" type="String" default='' />    
+    <aura:attribute name="errorMessage" type="String" default='' />
+    <aura:attribute name="subPlan" type="Subscription_Plan__c" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.retrieveSubscriptionPlan}"/>
+    
+    <div aura:id="success-notification" class="notification notification-success is-hidden-notification">
+        <p> {! v.successMessage } </p>
+        <div class="exit-button" onclick="{! c.closeSuccessNotification }">
+            <lightning:icon iconName='utility:close' />
+        </div>
+    </div>
+    
+    <div aura:id="error-notification" class="notification notification-error is-hidden-notification">
+    	<p>{! v.errorMessage }</p>
+        <div class="exit-button" onclick="{! c.closeErrorNotification }">
+            <lightning:icon iconName='utility:close' />
+        </div>
+    </div>
+    
+    <div class="center">
+        
+    	<lightning:card class="card">
+            <p>If you would like to create or change a subscription, you can do so here.</p>
+            
+            <button aura:id="create" id="create" class="slds-button slds-button_neutral slds-button_brand" onclick="{! c.highlight }">
+                New Subscription
+            </button>
+            
+            <button aura:id="edit" id="edit" class="slds-button slds-button_neutral" onclick="{! c.highlight }">
+                Modify Subscription
+            </button>
+            
+            <!-- create a plan tab -->
+            <div id="create-form" aura:id="create-form" class="tab">
+                <form onsubmit="{! c.createSub }">
+                    <abbr>Create a new subscription plan</abbr>
+                    <lightning:select label='Subscription' name='createSubName'>
+                        <option>Annual Subscription ($250)</option>
+                        <option>Monthly Subscription ($25)</option>
+                    </lightning:select>
+                    
+                    <lightning:button type="submit" class="submit-button">
+                        Submit
+                    </lightning:button>
+                </form>
+            </div>
+            
+            <!-- edit a plan tab -->
+            <div id="edit-form" aura:id="edit-form" class="tab is-hidden">
+                <form onsubmit="{! c.editSub }">
+                    <p>Modify your current subscription plan.</p>
+                    
+                    
+                    <aura:if isTrue="{! and(not(v.subPlan == null), not(v.subPlan.Cancelled_Subscription__c)) }">
+                    	<p style="margin-top: 0.5rem;">Your subscription expires on {! v.subPlan.Expiration_Date__c }.
+                        	By cancelling you are ending your automatic renewal, and your access will be revoked on
+                            that date.
+                        </p>
+                        
+                        <lightning:button type="submit" class="submit-button">
+                        	Cancel Subscription
+                        </lightning:button>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{! and(not(v.subPlan == null), v.subPlan.Cancelled_Subscription__c) }">
+                        <lightning:button type="submit" class="submit-button">
+                            Enable Subscription
+                        </lightning:button>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{! v.subPlan == null }">
+                        <p>You do not have a current subscription with us.</p>
+                    </aura:if>
+                    
+                </form>
+            </div>
+
+            
+        </lightning:card>
+    </div>
+</aura:component>

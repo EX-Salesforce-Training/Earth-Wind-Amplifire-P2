@@ -151,23 +151,31 @@
         <name>Report</name>
 	</types>
 	<types>
-        <members>unfiled$public/leads_over_time_gsO</members>
-        <name>Report</name>
-    </types>
-    </types>
+		<members>unfiled$public/leads_over_time_gsO</members>
+		<name>Report</name>
+	</types>
 	<types>
-    <members>public</members>
-    <members>Public_Dashboards/public</members>
-    <name>Dashboard</name>
+		<members>public</members>
+		<members>Public_Dashboards/public</members>
+		<name>Dashboard</name>
+	</types>
 	<types>
-        <members>PublicDashboards/information</members>
-        <name>Dashboard</name>
-    </types>
+		<members>PublicDashboards/information</members>
+		<name>Dashboard</name>
+	</types>
 	<types>
-        <members>PublicDashboards</members>
-        <members>PublicDashboards/information</members>
-        <name>Dashboard</name>
-    </types>
+		<members>PublicDashboards</members>
+		<members>PublicDashboards/information</members>
+		<name>Dashboard</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>Flow</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>Workflow</name>
+	</types>
 </types>
 	<version>51.0</version>
 </Package>

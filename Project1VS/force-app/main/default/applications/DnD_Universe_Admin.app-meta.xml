@@ -17,6 +17,7 @@
     <tabs>DnDCampaign__c</tabs>
     <tabs>Session__c</tabs>
     <tabs>Character__c</tabs>
+    <tabs>Subscription_Plan__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>DnD_Universe_Admin_UtilityBar</utilityBar>
 </CustomApplication>
