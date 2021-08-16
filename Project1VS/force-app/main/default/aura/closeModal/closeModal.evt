@@ -1,1 +1,3 @@
+<!-- this event fires to close a modal -->
+
 <aura:event type="COMPONENT" description="Event to close a modal" />

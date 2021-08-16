@@ -1,3 +1,11 @@
+/*
+Author: Zackary Frazier
+Last Modified Project: Project 2
+Created Project: Project 2 
+Desc:
+  unit tests for the subscription plan trigger
+*/
+
 @isTest
 public class TestSubscriptionPlanTrigger {
 	
