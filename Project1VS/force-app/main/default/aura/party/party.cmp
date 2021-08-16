@@ -3,7 +3,8 @@
     <aura:handler name="init" value="{!this}" action="{!c.fillParties}"/>
     <aura:attribute name="currentParty" type="Party__c"/>
     <aura:attribute name="characters" type="Character__c[]"/>
-    <aura:attribute name="campaign" type="DnDCampaign__c"/>
+    <aura:attribute name="campaigns" type="DnDCampaign__c"/>
+    <aura:attribute name="recordId" type="String" />
     <div class="slds-page-header">                                 
         <h1 class="slds-page-header__title">Party List</h1>                                  
     </div>
@@ -35,12 +36,12 @@
                 <aura:iteration items="{!v.characters}" var="character">
                     <tr>
                         <td class="slds-size_1-of-2">
-                            <a href="{!'/' + character.User__c}">{!character.User__r.Name}</a>
-                            <!--lightning:button variant="base" label="{!character.User__r.Name}"/-->
+                            <!--a href="{!'/' + character.User__c}">{!character.User__r.Name}</a-->
+                            <lightning:button variant="base" label="{!character.User__r.Name}" onclick="{!c.showRecord}" value="{!character.User__c}"/>
                         </td>
                         <td class="slds-size_1-of-2">
-                            <a href="{!'/' + character.Id}">{!character.Name}</a>
-                            <!--lightning:button variant="base" label="{!character.Name}"/-->
+                            <!--a href="{!'/' + character.Id}">{!character.Name}</a-->
+                            <lightning:button variant="base" label="{!character.Name}" onclick="{!c.showRecord}" value="{!character.Id}"/>
                         </td>
                         
                     </tr>
@@ -54,14 +55,16 @@
                     <th>Campaign</th>
                 </tr>
             </thead>
-            <tbody>           
-                <tr>
-                    <td class="slds-size_1-of-2">
-                        <a href="{!'/' + v.campaign.Dungeon_Master__c}">{!v.campaign.Dungeon_Master__r.Name}</a>
-                        <!--lightning:button variant="base" label="{!v.campaign.Dungeon_Master__r.Name}"/-->
-                    </td>
-                    <td class="slds-size_1-of-2">{!v.campaign.Campaign_Name__c}</td>                  
-                </tr>          
+            <tbody>
+                <aura:iteration items="{!v.campaigns}" var="campaign">
+                    <tr>
+                        <td class="slds-size_1-of-2">
+                            <!--a href="{!'/' + campaign.Dungeon_Master__c}">{!campaign.Dungeon_Master__r.Name}</a-->
+                            <lightning:button variant="base" label="{!campaign.Dungeon_Master__r.Name}" onclick="{!c.showRecord}" value="{!campaign.Dungeon_Master__c}"/>
+                        </td>
+                        <td class="slds-size_1-of-2">{!campaign.Campaign_Name__c}</td>
+                    </tr>
+                </aura:iteration>
             </tbody>
         </table>
     </aura:if>

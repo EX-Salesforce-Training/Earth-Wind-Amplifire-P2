@@ -11,7 +11,7 @@ public with sharing class partyController {
     }
     
     @AuraEnabled
-    public static DnDCampaign__c getCampaign(Id partyId) {
+    public static List<DnDCampaign__c> getCampaign(Id partyId) {
         return [SELECT Dungeon_Master__r.Name, Campaign_Name__c FROM DnDCampaign__c WHERE Party__c = :partyId];
     }
 }
