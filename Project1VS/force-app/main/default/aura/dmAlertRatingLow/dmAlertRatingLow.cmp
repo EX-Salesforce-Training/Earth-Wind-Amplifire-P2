@@ -1,3 +1,11 @@
+<!--
+ * Name: Joe Wilkerson
+ * Project2: DnD
+ * Date: 8/16/2021
+ * Description: Aura Component to take in user ratings and filter what is shown based on if the user is a player or Dm.
+ * Dm won't show up if a Dm is the User.
+-->
+
 <aura:component controller="playerAlertAura" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
     <aura:attribute name="DMList" type="User[]"/>
     <aura:attribute name="PlayerList" type="User[]"/>
