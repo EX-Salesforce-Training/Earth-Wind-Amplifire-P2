@@ -176,6 +176,10 @@
 		<members>*</members>
 		<name>Workflow</name>
 	</types>
+	<types>
+		<members>unfiled$public/Expiration_Notification</members>
+		<name>EmailTemplate</name>
+	</types>
 </types>
 	<version>51.0</version>
 </Package>
