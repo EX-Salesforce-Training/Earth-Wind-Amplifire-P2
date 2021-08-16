@@ -9,10 +9,25 @@
             <type>role</type>
         </recipients>
         <recipients>
-            <recipient>zackary.frazier@cunning-hawk-s0ozea.com</recipient>
+            <recipient>jawilkerson94@empathetic-otter-fb7lc8.com</recipient>
             <type>user</type>
         </recipients>
         <senderType>CurrentUser</senderType>
         <template>unfiled$public/SupportCaseResponse</template>
     </alerts>
+    <rules>
+        <fullName>Alert DM</fullName>
+        <actions>
+            <name>Player_rating_is_too_low</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User.User_Rating__c</field>
+            <operation>equals</operation>
+            <value>Low</value>
+        </criteriaItems>
+        <description>Alerts Dm if the player rating is low</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
 </Workflow>
