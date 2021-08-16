@@ -23,9 +23,19 @@
         campaign.setParam("partyId", party.Id);
         campaign.setCallback(this, function(response) {
             if (response.getState() === 'SUCCESS') {
-                cmp.set("v.campaign", response.getReturnValue());
+                cmp.set("v.campaigns", response.getReturnValue());
             }
         })
         $A.enqueueAction(campaign);
+    },
+    showRecord : function(cmp, event, helper) {
+        let user = event.getSource().get("v.value");
+        console.log('Value: ' + user);
+        let navEvt = $A.get("e.force:navigateToSObject");
+        console.log('nav: ' + navEvt);
+        navEvt.setParams({
+            "recordId": user
+        });
+        navEvt.fire();
     }
 })
