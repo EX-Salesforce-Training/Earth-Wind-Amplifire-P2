@@ -1,3 +1,11 @@
+<!--
+Author: Zackary Frazier
+Last Modified Project: Project 2
+Created Project: Project 2 
+  Desc:
+    This is a modal that prints out a success message when it is opened.
+-->
+
 <aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
     <aura:attribute name="isOpen" type="Boolean" default="false" />
     <aura:registerEvent name="closeModal" type="c:closeModal" />

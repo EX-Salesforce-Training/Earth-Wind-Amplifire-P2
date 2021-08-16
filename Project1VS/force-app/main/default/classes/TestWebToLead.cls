@@ -1,3 +1,11 @@
+/*
+Author: Zackary Frazier
+Last Modified Project: Project 2
+Created Project: Project 2 
+Desc:
+  unit tests for the web-to-lead controller
+*/
+
 @isTest
 public class TestWebToLead {
     
@@ -6,11 +14,8 @@ public class TestWebToLead {
     public static void test01() {
         
         System.assertEquals(false, WebToLeadController.createLead('', '', '', '', '', ''));
-        System.debug('(Success): Failed test01-01');
         System.assertEquals(false, WebToLeadController.createLead('Yeet', 'The', 'Dragon@gmail.com', 'HI', '', ''));
-        System.debug('(Success): Failed test01-02');
         System.assertEquals(false, WebToLeadController.createLead('Yeet', 'The', 'Dragon@gmail.com', '', 'HI', ''));
-        System.debug('(Success): Failed test01-03');
     }
     
     // positive test single

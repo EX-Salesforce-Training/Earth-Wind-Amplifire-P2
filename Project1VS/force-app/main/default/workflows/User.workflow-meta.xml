@@ -8,10 +8,6 @@
             <recipient>Dungeon_Master</recipient>
             <type>role</type>
         </recipients>
-        <recipients>
-            <recipient>jawilkerson94@empathetic-otter-fb7lc8.com</recipient>
-            <type>user</type>
-        </recipients>
         <senderType>CurrentUser</senderType>
         <template>unfiled$public/SupportCaseResponse</template>
     </alerts>

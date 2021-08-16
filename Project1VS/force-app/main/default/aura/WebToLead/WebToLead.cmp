@@ -1,3 +1,13 @@
+<!--
+Author: Zackary Frazier
+Last Modified Project: Project 2
+Created Project: Project 2 
+Desc:
+  This component is for creating new leads from the website. It uses a custom controller as
+  opposed to the standard web-to-lead approach to limit the rerenders required for the tool
+  to work.
+-->
+
 <aura:component controller="WebToLeadController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >  
 	
     <!-- submission related -->

@@ -35,8 +35,8 @@
         $A.enqueueAction(rList);
     },
     toggleRaceTooltip : function(cmp, evt, hlp) {
-        
-       hlp.toggleTooltip(cmp, "race-tooltip");
+        const tooltip = cmp.find('race-tooltip');
+		$A.util.toggleClass(tooltip, "ishidden");
 	},
     toggleAttributesTooltip : function(cmp, evt, hlp) {
         hlp.toggleTooltip(cmp, "attributes-tooltip");

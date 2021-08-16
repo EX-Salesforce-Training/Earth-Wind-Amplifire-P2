@@ -1,3 +1,12 @@
+<!--
+Author: Zackary Frazier
+Last Modified Project: Project 2
+Created Project: Project 2 
+Desc: 
+  this component is for creating new subscriptions for unsubscribed users, and for
+  allowing users to cancel / enable their subscriptions quickly
+-->
+
 <aura:component controller="CreateSubscriptionController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
     <aura:attribute name="createSubName" type="String" default="Annual Subscription ($250)" />
     <aura:attribute name="editSubName" type="String" default="Annual Subscription ($250)" />

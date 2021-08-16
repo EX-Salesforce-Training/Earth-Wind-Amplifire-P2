@@ -1,3 +1,11 @@
+/*
+Author: Zackary Frazier
+Last Modified Project: Project 2
+Created Project: Project 2 
+Desc:
+  trigger handler for the subscription plan, prevents duplicate subscription plans from being created
+*/
+
 public class SubscriptionPlanTriggerHandler {
     
     // @desc : set an error on all duplicates on insert

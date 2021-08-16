@@ -1,5 +1,14 @@
+/*
+Author: Zackary Frazier
+Last Modified Project: Project 2
+Created Project: Project 2 
+Desc:
+  controller for the webtolead page
+*/
+
 public class WebToLeadController {
 	
+    // @desc : create a new lead for a customer
     @AuraEnabled
     public static Boolean createLead(String first_name, String last_name, String email, String city, String state, String company) {
         
