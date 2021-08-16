@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>DM</name>
+    <queueMembers>
+        <roles>
+            <role>Dungeon_Master</role>
+        </roles>
+        <users>
+            <user>jawilkerson94@empathetic-otter-fb7lc8.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Task</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>UserProvisioningRequest</sobjectType>
+    </queueSobject>
+</Queue>

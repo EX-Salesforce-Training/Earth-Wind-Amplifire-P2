@@ -5,14 +5,42 @@
     <aura:handler name="init" value="{!this}" action="{!c.Party}"/>
     <aura:handler name="init" value="{!this}" action="{!c.User}"/>
     <aura:handler name="init" value="{!this}" action="{!c.Race}"/>
+    <aura:handler event="force:refreshView" action="{!c.isRefreshed}" />
+    
     <div>
-        <p>Name: {!v.User.Name}</p>
-        <p>Username: {!v.User.Username}</p>
-        <p>Email: {!v.User.Email}</p>
-        <p>Region: {!v.User.Region}</p>
+        <div class="container">
+            <img class="image" src="{!$Resource.dnddice}"/>
+            <div class="overlay">
+            	<div class="text"><p><b>Player Characters</b></p></div>
+            </div>
+        </div>
     </div>
-    <br/><br/>
-    <div class="slds-p-around_medium" >
+    <div >
+        <p style="text-align:center;">Name: {!v.User.Name}</p>
+        <p style="text-align:center;">Username: {!v.User.Username}</p>
+        <p style="text-align:center;">Email: {!v.User.Email}</p>
+        <p style="text-align:center;">Region: {!v.User.Region}</p>
+    </div>
+    <div class="c-container">
+        <lightning:layout horizontalAlign="space" >
+            <lightning:layoutItem padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="Field 1"><b>Characters</b></p>
+                    <br/>
+                    <div class="scroll">
+                    <aura:iteration items="{!v.partyList}" var="party">
+                        <p>Character Name</p>
+                        <div>{!party.Name}</div>
+                        <p>Party</p>
+                        <div>{!party.Party__r.Name}</div>
+                    </aura:iteration>
+                    </div>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <div class="header-column">
+                    <p class="field-title" title="Field 1"><b>Create a Character</b></p>
+                    <div class="slds-p-around_medium" >
         <lightning:recordEditForm objectApiName="Character__c" >
             <lightning:messages />
             
@@ -76,18 +104,16 @@
             <lightning:inputField fieldName="Wisdom__c"/>
             <lightning:inputField fieldName="Intelligence__c"/>
             <lightning:inputField fieldName="Charisma__c"/>
+            <lightning:inputField fieldName="Party__c"/>
             <lightning:inputField fieldName="General_Notes__c"/>    
             <lightning:button type="submit"
                               name="Submit"
-                              label="Create Character" class="slds-m-top_medium"/>
+                              label="Create Character" class="button"
+                              onclick="{!c.isRefreshed}"/>
         </lightning:recordEditForm>
     </div>
-    <br/><br/>
-    <aura:iteration items="{!v.partyList}" var="party">
-        <p>Character Name</p>
-        <div>{!party.Name}</div>
-        <p>Party</p>
-        <div>{!party.Party__r.Name}</div>
-        <br/>
-    </aura:iteration>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
 </aura:component>
