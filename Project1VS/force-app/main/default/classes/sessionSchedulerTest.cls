@@ -1,3 +1,14 @@
+/*******************************************************************************
+ *
+ * Name: sessionSchedulerTest 
+ * Author: Gregory Mannerberg (gregory.mannerberg@revature.net)
+ * Created: 08/16/2021
+ * Updated: 08/17/2021
+ * Description: Tests for the session scheduler
+ *
+ *******************************************************************************
+ */
+
 @isTest
 private class sessionSchedulerTest {
 
