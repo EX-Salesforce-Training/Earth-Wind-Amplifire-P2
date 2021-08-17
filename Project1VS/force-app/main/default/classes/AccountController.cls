@@ -2,7 +2,8 @@ public class AccountController{
     @AuraEnabled
     public static List <DndCampaign__c> fetchCampaigns() {
         //Qyery 10 accounts
-        List<DndCampaign__c> ccList = [SELECT  Name,Status__c,Party__c,Dungeon_Master__c,Campaign_Name__c,Summary__C from DndCampaign__c WHERE Status__C='New'];
+        Character__c userChar = [SELECT Party__c FROM Character__c WHERE User__c = :UserInfo.getUserId()];
+        List<DndCampaign__c> ccList = [SELECT  Name,Status__c,Party__c,Dungeon_Master__c,Campaign_Name__c,Summary__C from DndCampaign__c WHERE Party__c != :userChar.Party__c];
         //return list of accounts
         return ccList;
     }
@@ -15,35 +16,26 @@ public class AccountController{
     } 
     
     
-    @AuraEnabled
-    public static void freezeUser(String userName){
-        
-        User userObject = [SELECT Name, Rating__c from User where Name=:userName];
-        userObject.Rating__c='Low';
-        
-        insert userObject;
-    }
-    
-    
+   
     @AuraEnabled
      public static List <DndCampaign__c> fetchCurrentCampaigns() {
-        //Qyery 10 accounts
-        String id= UserInfo.getUserId();
-        List<DndCampaign__c> currentList = [SELECT  Name,Status__c,Party__c,Dungeon_Master__c,Campaign_Name__c,Summary__C FROM DndCampaign__c WHERE Status__c='In Progress'];
-        //return list of accounts
-        return currentList;
+         //Qyery 10 accounts
+         String id= UserInfo.getUserId();
+         Character__c userChar = [SELECT Party__c FROM Character__c WHERE User__c = :UserInfo.getUserId()];
+         List<DndCampaign__c> currentList = [SELECT  Name,Status__c,Party__c,Dungeon_Master__c,Campaign_Name__c,Summary__C FROM DndCampaign__c WHERE Party__c=:userChar.Party__c];
+         //return list of accounts
+         return currentList;
     }
     
     
     @AuraEnabled
-    public static void insertNewCampaign(String recordName){
-        DndCampaign__c newRecord= [SELECT Status__c, Name FROM DndCampaign__c where campaign_Name__C=:recordName];
+    public static void insertNewCampaign(String recordName) {
+        Character__c userChar = [SELECT Party__c FROM Character__c WHERE User__c = :UserInfo.getUserId()];
+        DndCampaign__c newRecord= [SELECT Party__c FROM DndCampaign__c where campaign_Name__C=:recordName];
+        newRecord.Party__c = userChar.Party__c;
         
-        newRecord.Status__c='In Progress';
-       // newRecord.OwnerId=UserInfo.getUserId();
-        
-      // UPDATE 
-      update newRecord;
+        // UPDATE 
+        update newRecord;
     }
     
     
@@ -51,10 +43,10 @@ public class AccountController{
     
     @AuraEnabled 
     public static void deleteCampaign(String recordName){
-       DndCampaign__c newRecord =[SELECT Name FROM DndCampaign__C where campaign_Name__C=:recordName];
-       // Id id=0;
-        newRecord.Status__c='New';
-      //  newRecord.OwnerId='';
+        Character__c userChar = [SELECT Party__c FROM Character__c WHERE User__c = :UserInfo.getUserId()];
+        DndCampaign__c newRecord =[SELECT Party__c FROM DndCampaign__C where campaign_Name__c=:recordName AND Party__c=:userChar.Party__c];
+        newRecord.Party__c = null;
+       
         
         update newRecord;
     }
