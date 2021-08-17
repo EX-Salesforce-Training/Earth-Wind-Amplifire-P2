@@ -1,5 +1,5 @@
-<aura:component controller="AccountController">
-      
+<aura:component controller="AccountController" implements="forceCommunity:availableForAllPageTypes" access="global">
+    
     
     
     <div>
@@ -10,21 +10,21 @@
     </div>
     
     <div class="slds-grid slds-grid_align-space slds-box">
-            <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
-                <!-- Auto Number -->
-                <lightning:outputField title="Campaigns" />
+        <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
+            <!-- Auto Number -->
+            <lightning:outputField title="Campaigns" />
         </div>
     </div>
-      
-
+    
+    
     
     
     <aura:attribute type="Campaign[]" name="ccList"/>
-
     
-  <aura:handler name="init" value="{!this}" action="{!c.fetchCC}"/>
-        <aura:attribute name="mycolumns" type="List"/>
-     
+    
+    <aura:handler name="init" value="{!this}" action="{!c.fetchCC}"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    
     
     <lightning:datatable data="{! v.ccList }"
                          columns="{! v.mycolumns }"
@@ -35,7 +35,7 @@
     
     
     
-       <div>
+    <div>
         <lightning:verticalNavigation>
             <lightning:verticalNavigationSection label="Current Campaign Description">
             </lightning:verticalNavigationSection>
@@ -43,24 +43,21 @@
     </div>
     
     <div class="slds-grid slds-grid_align-space slds-box">
-            <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
-                <!-- Auto Number -->
-                <lightning:outputField title="Current Campaign Description" />
+        <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
+            <!-- Auto Number -->
+            <lightning:outputField title="Current Campaign Description" />
         </div>
     </div>
     
     
     <aura:handler name="init" value="{!this}" action="{!c.fetchCurrent}"/>
-     <aura:attribute name="myCurrentcolumns" type="List"/>
+    <aura:attribute name="myCurrentcolumns" type="List"/>
     
-    <aura:attribute type="Campaign[]" name="currentCampaignList"/>
-
-      <lightning:datatable data="{! v.currentCampaignList }"
+    <aura:attribute type="DnDCampaign__c[]" name="currentCampaignList"/>
+    
+    <lightning:datatable data="{! v.currentCampaignList }"
                          columns="{! v.myCurrentcolumns }"
                          keyField="id"
                          hideCheckboxColumn="true"
-                         onrowaction="{!c.handleRowAction}"/>
-    
-
-      
+                         onrowaction="{!c.handleRowAction}"/>     
 </aura:component>
