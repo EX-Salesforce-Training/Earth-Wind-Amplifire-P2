@@ -8,9 +8,6 @@ public class AccountController{
         return ccList;
     }
     
-
-
-=======
     @AuraEnabled
     public static List <User> fetchUsers(){
         List<User> usersList = [SELECT Name from User];
