@@ -23,6 +23,7 @@ private class sessionSchedulerTest {
         insert campaign;
     }
     
+    // Test getting a campaign
     @isTest
     static void testGetDnDCampaignsSingle() {
         setup();
@@ -31,6 +32,7 @@ private class sessionSchedulerTest {
         System.assertEquals('test campaign', campList[0].Campaign_Name__c);
     }
     
+    // Test creating a single session event
     @isTest
     static void testaddSessionSingle() {
         setup();
@@ -45,6 +47,7 @@ private class sessionSchedulerTest {
         System.assertEquals(endTime, e.EndDateTime);
     }
     
+    // Test repeating a session daily with the default end date
     @isTest
     static void testRepeatingDayNoneEvent() {
         setup();
@@ -56,6 +59,7 @@ private class sessionSchedulerTest {
         System.assertEquals(366, sessions.size());
     }
     
+    // Test repeating a session daily with an entered end date
     @isTest
     static void testRepeatingDayOnEvent() {
         setup();
@@ -68,6 +72,7 @@ private class sessionSchedulerTest {
         System.assertEquals(15, sessions.size());
     }
     
+    // Test repeating a session daily for a given number of sessions
     @isTest
     static void testRepeatingDayAfterEvent() {
         setup();
@@ -80,6 +85,7 @@ private class sessionSchedulerTest {
         System.assertEquals(11, sessions.size());
     }
     
+    // Test repeating a session weekly with the default end date
     @isTest
     static void testRepeatingWeekNoneEvent() {
         setup();
@@ -91,6 +97,7 @@ private class sessionSchedulerTest {
         System.assertEquals(53, sessions.size());
     }
     
+    // Test repeating a session weekly for a given number of sessions
     @isTest
     static void testRepeatingWeekAfterEvent() {
         setup();
@@ -102,6 +109,7 @@ private class sessionSchedulerTest {
         System.assertEquals(4, sessions.size());
     }
     
+    // Test repeating a session weekly with an entered end date
     @isTest
     static void testRepeatingWeekOnEvent() {
         setup();
@@ -114,6 +122,7 @@ private class sessionSchedulerTest {
         System.assertEquals(3, sessions.size());
     }
     
+    // Test repeating a session monthly with the default end date
     @isTest
     static void testRepeatingMonthNoneEvent() {
         setup();
@@ -125,6 +134,7 @@ private class sessionSchedulerTest {
         System.assertEquals(13, sessions.size());
     }
     
+    // Test repeating a session monthly for a given number of sessions
     @isTest
     static void testRepeatingMonthAfterEvent() {
         setup();
@@ -136,6 +146,7 @@ private class sessionSchedulerTest {
         System.assertEquals(5, sessions.size());
     }
     
+    // Test repeating a session monthly with an entered end date
     @isTest
     static void testRepeatingMonthOnEvent() {
         setup();
