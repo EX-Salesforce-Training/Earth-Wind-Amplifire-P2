@@ -1,3 +1,10 @@
+<!--
+ Name: sessionScheduler
+ Author: Gregory Mannerberg (gregory.mannerberg@revature.net)
+ Created: 8/11/2021
+ Updated: 08/17/2021
+ Description: Session scheduling aura component
+-->
 <aura:component controller="sessionScheduler" implements="forceCommunity:availableForAllPageTypes" access="global">
     <aura:attribute name="campaigns" type="DnDCampaign__c[]"/>
     <aura:attribute name="showList" type="Boolean" default="true"/>

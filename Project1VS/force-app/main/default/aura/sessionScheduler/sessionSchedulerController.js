@@ -1,3 +1,13 @@
+/*******************************************************************************
+ *
+ * Name: sessionSchedulerController
+ * Author: Gregory Mannerberg (gregory.mannerberg@revature.net)
+ * Created: 08/11/2021
+ * Updated: 08/17/2021
+ * Description: Client side controller for session scheduler
+ *
+ *******************************************************************************
+ */
 ({
 	listCampaigns : function(component, event, helper) {
 		let campaigns = component.get("c.getDnDCampaigns");
