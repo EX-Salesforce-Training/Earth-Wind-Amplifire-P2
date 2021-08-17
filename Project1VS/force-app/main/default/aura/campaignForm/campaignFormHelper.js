@@ -5,12 +5,12 @@
             {label: 'Status', fieldName: 'Status__c', type: 'text'},
 
             {label: 'Summary', fieldName: 'Summary__c', type: 'text'},
-            {label: 'Add Campaign', type: 'button', initialWidth: 135, typeAttributes: { label: 'Join', name: 'join', title: 'Join'}}            
+            {label: 'Add Campaign', type: 'button', initialWidth: 135, typeAttributes: { label: 'Join', name: 'join', title: 'Join'}},           
 
 
             {label: 'Summary', fieldName: 'Summary__c', type: 'text'},
 
-          {label: 'Images', fieldName: 'Status__c', type: 'Image'},
+            {label: 'Images', fieldName: 'Status__c', type: 'Image'},
             {label: 'Summary', fieldName: 'Summary__c', type: 'text'},
             {label: 'View', type: 'button', initialWidth: 135, typeAttributes: { label: 'View Details', name: 'view_details', title: 'Click to View Details'}},
 
