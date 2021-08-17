@@ -6,6 +6,7 @@
  Description: Session scheduling aura component
 -->
 <aura:component controller="sessionScheduler" implements="forceCommunity:availableForAllPageTypes" access="global">
+    <!-- Attributes -->
     <aura:attribute name="campaigns" type="DnDCampaign__c[]"/>
     <aura:attribute name="showList" type="Boolean" default="true"/>
     <aura:attribute name="showWizard" type="Boolean"/>
@@ -34,11 +35,13 @@
     <aura:attribute name="monthlyWhich" type="String" default="none"/>
     <aura:attribute name="monthlyWhichDay" type="String" default="Sunday"/>
     <aura:attribute name="monthDay" type="Integer" />
-    
+    <!-- Initialize campaign list -->
     <aura:handler name="init" value="{!this}" action="{!c.listCampaigns}"/>
+    <!-- Component header -->
     <div class="slds-page-header">                                 
         <h1 class="slds-page-header__title">Session Scheduler</h1>                                  
     </div>
+    <!-- Show campaign list -->
     <aura:if isTrue="{!v.showList}">
         <table class="slds-table slds-table_bordered slds-table_col-bordered">
             <thead><tr><th>Your Campaigns</th></tr></thead>
@@ -53,15 +56,16 @@
             </tbody>
         </table>
     </aura:if>
-    
+    <!-- Show the scheduling wizard -->
     <aura:if isTrue="{!v.showWizard}">
         <div>
+            <!-- Get the start and end times -->
             <lightning:input label="Start" value="{!v.startTime}" type="datetime" required="true"/>
             <lightning:input label="End" value="{!v.endTime}" type="datetime" required="true"/>
             <lightning:input label="Repeat" value="{!v.repeat}" type="checkbox" onchange="{!c.showRepeat}"/>
             <!-- Repeat -->
             <aura:if isTrue="{!v.repeat}">
-                <!-- Repeat Interval -->
+                <!-- Repeat Interval: daily, weekly, or monthly-->
                 <lightning:buttonGroup>
                     <aura:if isTrue="{!v.dailySelected}" >
                         <lightning:button variant="brand" label="Daily" onclick="{!c.showDailyOptions}" />
@@ -335,6 +339,7 @@
                         </aura:set>
                     </aura:if-->
                 </aura:if>
+                <!-- Get repeat end condition information -->
                 <lightning:radioGroup label="Series End Date"
                                       options="{!v.endOptions}"
                                       value="{!v.endType}"
@@ -343,6 +348,7 @@
                 <lightning:input label="Number of Events" type="integer" value="{!v.numRepeats}" disabled="{!v.endType != 'after'}" required="{!v.endType == 'after'}" class="slds-size_1-of-8"/>
                 <lightning:input label="Final Date" value="{!v.endRepeatDate}" type="date" disabled="{!v.endType != 'on'}" required="{!v.endType == 'on'}" class="slds-size_1-of-8"/> 
             </aura:if>
+            <!-- Submit or cancel the form -->
             <lightning:button label="Submit" onclick="{!c.submitSession}"/>
             <lightning:button label="Cancel" onclick="{!c.goBack}"/>
         </div>

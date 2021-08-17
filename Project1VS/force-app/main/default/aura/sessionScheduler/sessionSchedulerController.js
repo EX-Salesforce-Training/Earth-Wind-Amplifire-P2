@@ -9,6 +9,7 @@
  *******************************************************************************
  */
 ({
+    // Get the list of the current user's d&d campaigns
 	listCampaigns : function(component, event, helper) {
 		let campaigns = component.get("c.getDnDCampaigns");
         campaigns.setCallback(this, function(response) {
@@ -18,15 +19,18 @@
         })
         $A.enqueueAction(campaigns);
 	},
+    // Display the scheduling wizard
     showWizard : function(component, event, helper) {
         component.set("v.showList", false);
         component.set("v.showWizard", true);
         component.set("v.campaignId", event.getSource().get("v.value"));
     },
+    // Return to the campaign list
     goBack : function(component, event, helper) {
         component.set("v.showList", true);
         component.set("v.showWizard", false);
     },
+    // Submit the input data to the server to create the session event(s)
     submitSession : function(component, event, helper) {
         let session = component.get("c.addSession");
         session.setParams({whatId: component.get("v.campaignId"),
@@ -50,6 +54,7 @@
         })
         $A.enqueueAction(session);
     },
+    // Display the repeat options on the wizard
     showRepeat : function(component, event, helper) {
         component.set("v.repeat",!component.get("v.repeat"));
         component.set("v.dailySelected", true);
@@ -57,6 +62,7 @@
         component.set("v.frequency", 1);
         component.set("v.endType", "none");
     },
+    // Display the daily repeat options
     showDailyOptions : function(component, event, helper) {
         component.set("v.dailySelected", true);
         component.set("v.weeklySelected", false);
@@ -67,6 +73,7 @@
         component.set("v.dailyExtra", false);
         component.set("v.endType", "none");
     },
+    // Display the weekly repeat options
     showWeeklyOptions : function(component, event, helper) {
         component.set("v.dailySelected", false);
         component.set("v.weeklySelected", true);
@@ -77,6 +84,7 @@
         component.set("v.weeklyExtra", false);
         component.set("v.endType", "none");
     },
+    // Display the monthly repeat options
     showMonthlyOptions : function(component, event, helper) {
         component.set("v.dailySelected", false);
         component.set("v.weeklySelected", false);
@@ -89,6 +97,7 @@
         component.set("v.monthlyWhich", "none");
         component.set("v.endType", "none");
     },
+    // Display the yearly repeat options (Not added to component atm)
     showYearlyOptions : function(component, event, helper) {
         component.set("v.dailySelected", false);
         component.set("v.weeklySelected", false);
@@ -99,6 +108,7 @@
         component.set("v.yearlyExtra", false);
         component.set("v.endType", "none");
     },
+    // Handle a change in the daily dropdown menu
     dailyDropdown : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         if (choice == 3) {
@@ -110,10 +120,12 @@
             component.set("v.frequency", choice);
         }
     },
+    // Handle a change in the daily extra dropdown menu
     dailyExtraDropdown : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         component.set("v.frequency", choice);
     },
+    // Handle a change in the weekly dropdown menu
     weeklyDropdown : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         if (choice == 3) {
@@ -125,6 +137,7 @@
             component.set("v.frequency", choice);
         }
     },
+    // Handle a change in the weekly extra dropdown menu
     weeklyExtraDropdown : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         component.set("v.frequency", choice);
@@ -177,6 +190,7 @@
             component.set("v.repeatDayOfWeek[6]", false);
         }    
     },
+    // Handle a change in the monthly dropdown menu
     monthlyDropdown : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         if (choice == 3) {
@@ -188,6 +202,8 @@
             component.set("v.frequency", choice);
         }
     },
+    // For selecting a specific day (1-31) of the month to repeat.
+    // (Not used atm)
     monthlySpecific : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         if (choice == 1) {
@@ -199,18 +215,25 @@
             component.set("v.monthlyWhich", "first");
         }
     },
+    // For selecting a specific day (1-31) of the month to repeat.
+    // (Not used atm)
     monthlySpecificDropdown : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         component.set("v.monthDay", choice);
     },
+    // Select a week (first, second, ..., last) to repeat on monthly
+    // (Not used at the moment; monthlyWhich component value always
+    // defaulting to none for right now)
     monthlyWhich : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         component.set("v.monthlyWhich", choice);
     },
+    // Select a day of the week to repeat on monthly (Not used atm)
     monthlyWhichDay : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         component.set("v.monthlyWhichDay", choice);
     },
+    // Handle a change in the monthly extra dropdown menu
     monthlyExtraDropdown : function(component, event, helper) {
         let choice = event.getSource().get("v.value");
         component.set("v.frequency", choice);
