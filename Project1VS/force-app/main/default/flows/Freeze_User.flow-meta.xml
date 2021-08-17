@@ -29,14 +29,6 @@
         <label>User Rating</label>
         <locationX>212</locationX>
         <locationY>435</locationY>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>UserId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </filters>
         <inputAssignments>
             <field>IsFrozen</field>
             <value>
@@ -54,7 +46,7 @@
         <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>Rating__c</field>
+            <field>User_Rating__c</field>
             <operator>EqualTo</operator>
             <value>
                 <stringValue>Low</stringValue>
@@ -64,5 +56,5 @@
         <recordTriggerType>Update</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
 </Flow>
