@@ -19,7 +19,6 @@
         <p style="text-align:center;">Name: {!v.User.Name}</p>
         <p style="text-align:center;">Username: {!v.User.Username}</p>
         <p style="text-align:center;">Email: {!v.User.Email}</p>
-        <p style="text-align:center;">Region: {!v.User.Region}</p>
     </div>
     <div class="c-container">
         <lightning:layout horizontalAlign="space" >
