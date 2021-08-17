@@ -3,7 +3,7 @@
     color: #040404;
     margin: auto;
   	border: 3px solid #DF0000;
-    width: 50%;
+    width: 70%;
   	padding: 10px;
     animation-name: progressBar;
   	animation-duration: 2s;
@@ -77,5 +77,5 @@
 
 @-webkit-keyframes progressBar {
   0% { width: 0;}
-    50% { width: 50%;}
+    70% { width: 70%;}
 }

@@ -24,14 +24,14 @@
         <lightning:layout horizontalAlign="space" >
             <lightning:layoutItem padding="around-small">
                 <div class="header-column">
-                    <p class="field-title" title="Field 1"><b>Characters</b></p>
+                    <p class="field-title" title="Field 1"><strong>Characters:</strong></p>
                     <br/>
                     <div class="scroll">
                         <aura:iteration items="{!v.partyList}" var="party">
-                            <p>Character Name</p>
-                            <div>{!party.Name}</div>
-                            <p>Party</p>
-                            <div>{!party.Party__r.Name}</div>
+                            <lightning:card>
+                                <p style="margin: 0.35rem">Character Name: {! if(party.Name, party.Name, 'N/A') }</p>
+                                <p style="margin: 0.35rem">Party: {! if(party.Party__r.Name, party.Party__r.Name, 'N/A') }</p>
+                            </lightning:card>
                         </aura:iteration>
                     </div>
                 </div>

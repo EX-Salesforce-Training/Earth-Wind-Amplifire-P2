@@ -1,10 +1,3 @@
-<!--
- Name: party
- Author: Gregory Mannerberg (gregory.mannerberg@revature.net)
- Created: 08/9/2021
- Updated: 08/17/2021
- Description: Aura component version of the party page
--->
 <aura:component controller="partyController" implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
     <aura:attribute name="parties" type="Party__c[]"/>
     <aura:handler name="init" value="{!this}" action="{!c.fillParties}"/>
@@ -12,7 +5,6 @@
     <aura:attribute name="characters" type="Character__c[]"/>
     <aura:attribute name="campaigns" type="DnDCampaign__c"/>
     <aura:attribute name="recordId" type="String" />
-    <!-- Party List -->
     <div class="slds-page-header">                                 
         <h1 class="slds-page-header__title">Party List</h1>                                  
     </div>
@@ -28,9 +20,7 @@
             </aura:iteration>            
         </tbody>
     </table>
-    <!-- Show if a party has been selected -->
     <aura:if isTrue="{!v.currentParty}">
-        <!-- List the party's players and their related characters -->
         <div class="slds-page-header">                                 
             <h1 class="slds-page-header__title">Party Info: {!v.currentParty.Name}</h1>                                  
         </div>
@@ -47,7 +37,7 @@
                     <tr>
                         <td class="slds-size_1-of-2">
                             <!--a href="{!'/' + character.User__c}">{!character.User__r.Name}</a-->
-                            <lightning:button variant="base" label="{!character.User__r.Name}" onclick="{!c.showRecord}" value="{!character.User__c}"/>
+                            <lightning:button variant="base" label="{!character.User__r.Alias}" onclick="{!c.showRecord}" value="{!character.User__c}"/>
                         </td>
                         <td class="slds-size_1-of-2">
                             <!--a href="{!'/' + character.Id}">{!character.Name}</a-->
@@ -58,7 +48,6 @@
                 </aura:iteration>            
             </tbody>
         </table>
-        <!-- Show the DM and the campaign -->
     	<table class="slds-table slds-table_bordered slds-table_col-bordered">
             <thead>
                 <tr>
@@ -71,7 +60,9 @@
                     <tr>
                         <td class="slds-size_1-of-2">
                             <!--a href="{!'/' + campaign.Dungeon_Master__c}">{!campaign.Dungeon_Master__r.Name}</a-->
-                            <lightning:button variant="base" label="{!campaign.Dungeon_Master__r.Name}" onclick="{!c.showRecord}" value="{!campaign.Dungeon_Master__c}"/>
+                            <lightning:button variant="base" label="{!campaign.Dungeon_Master__r.Alias}" onclick="{!c.showRecord}" value="{!campaign.Dungeon_Master__c}">
+                            	{! campaign.Dungeon_Master__r.Alias }
+                            </lightning:button>
                         </td>
                         <td class="slds-size_1-of-2">{!campaign.Campaign_Name__c}</td>
                     </tr>
