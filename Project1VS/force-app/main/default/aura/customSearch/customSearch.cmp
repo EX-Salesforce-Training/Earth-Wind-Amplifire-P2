@@ -1,0 +1,22 @@
+<aura:component controller="AccountController">
+    
+    
+    
+      <aura:attribute type="User[]" name="users"/>
+    
+    
+     <aura:attribute type="String" name="user"/>
+        
+      <aura:handler name="init" value="{!this}" action="{!c.fetchUser}"/>
+    
+        
+    <lightning:select aura:id="select" name="select" label="Select a user">
+        <aura:iteration items="{!v.users}" var ="user">
+            <option value="{!user.name}">{!user.Name}</option>
+      
+               </aura:iteration>
+    </lightning:select>
+   
+        <lightning:button variant="base" label="Freeze User" title="Base action" onclick="{! c.handleClick }"/>
+    
+</aura:component>
