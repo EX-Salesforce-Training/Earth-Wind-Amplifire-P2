@@ -1,3 +1,10 @@
+<!--
+ Name: party
+ Author: Gregory Mannerberg (gregory.mannerberg@revature.net)
+ Created: 08/9/2021
+ Updated: 08/17/2021
+ Description: Aura component version of the party page
+-->
 <aura:component controller="partyController" implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
     <aura:attribute name="parties" type="Party__c[]"/>
     <aura:handler name="init" value="{!this}" action="{!c.fillParties}"/>
@@ -5,6 +12,7 @@
     <aura:attribute name="characters" type="Character__c[]"/>
     <aura:attribute name="campaigns" type="DnDCampaign__c"/>
     <aura:attribute name="recordId" type="String" />
+    <!-- Party List -->
     <div class="slds-page-header">                                 
         <h1 class="slds-page-header__title">Party List</h1>                                  
     </div>
@@ -20,7 +28,9 @@
             </aura:iteration>            
         </tbody>
     </table>
+    <!-- Show if a party has been selected -->
     <aura:if isTrue="{!v.currentParty}">
+        <!-- List the party's players and their related characters -->
         <div class="slds-page-header">                                 
             <h1 class="slds-page-header__title">Party Info: {!v.currentParty.Name}</h1>                                  
         </div>
@@ -48,6 +58,7 @@
                 </aura:iteration>            
             </tbody>
         </table>
+        <!-- Show the DM and the campaign -->
     	<table class="slds-table slds-table_bordered slds-table_col-bordered">
             <thead>
                 <tr>
