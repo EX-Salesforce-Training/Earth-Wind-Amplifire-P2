@@ -1,33 +1,27 @@
-<aura:component  controller="AccountController">
-	
+<aura:component  controller="AccountController" implements="forceCommunity:availableForAllPageTypes" access="global">
+    
     <aura:handler name="init" value="{!this}" action="{!c.fetchCampaign}"/>
     
     <aura:attribute type="Campaign[]" name="ccList"/>
     
-        <lightning:accordion aura:id="accordion" activeSectionName="A">
-            
-            <aura:iteration items="{!v.ccList}" var ="campaign">
-        <lightning:accordionSection name="A" label="{!campaign.Name}">
-            <aura:set attribute="actions">
-                <lightning:buttonMenu aura:id="menu" alternativeText="Show menu" iconSize="x-small">
-                    <lightning:menuItem value="New" label="Menu Item One" />
-                    <lightning:menuItem value="Edit" label="Menu Item Two" />
-                </lightning:buttonMenu>
-            </aura:set>
-            <aura:set attribute="body">
-                <div class="image">
-             <img src=""/>
-                </div>
-                <p>{!campaign.Name}</p>
-                <p>{!campaign.Status__c}</p>
-            </aura:set>
-        </lightning:accordionSection>
-       </aura:iteration>
-    </lightning:accordion>
-    
-    
-    
-    
-    
-    
+    <lightning:accordion aura:id="accordion" activeSectionName="A">
+        
+        <aura:iteration items="{!v.ccList}" var ="campaign">
+            <lightning:accordionSection name="A" label="{!campaign.Name}">
+                <aura:set attribute="actions">
+                    <lightning:buttonMenu aura:id="menu" alternativeText="Show menu" iconSize="x-small">
+                        <lightning:menuItem value="New" label="Menu Item One" />
+                        <lightning:menuItem value="Edit" label="Menu Item Two" />
+                    </lightning:buttonMenu>
+                </aura:set>
+                <aura:set attribute="body">
+                    <div class="image">
+                        <img src=""/>
+                    </div>
+                    <p>{!campaign.Name}</p>
+                    <p>{!campaign.Status__c}</p>
+                </aura:set>
+            </lightning:accordionSection>
+        </aura:iteration>
+    </lightning:accordion> 
 </aura:component>

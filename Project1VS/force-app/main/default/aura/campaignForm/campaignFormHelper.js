@@ -2,10 +2,10 @@
     fetchCCHelper : function(component, event, helper) {
         component.set('v.mycolumns', [
             {label: 'Campaign Name', fieldName: 'Campaign_Name__c', type: 'text'},
-                {label: 'Status', fieldName: 'Status__c', type: 'text'},
-                 {label: 'Images', fieldName: 'Status__c', type: 'Image'},
-                {label: 'Summary', fieldName: 'Summary__C', type: 'text'},
-                {label: 'Dungeon Master', fieldName: 'Dungeon_Master__c', type: 'text '},
+            {label: 'Status', fieldName: 'Status__c', type: 'text'},
+            {label: 'Images', fieldName: 'Status__c', type: 'Image'},
+            {label: 'Summary', fieldName: 'Summary__C', type: 'text'},
+            {label: 'Dungeon Master', fieldName: 'Dungeon_Master__c', type: 'text '},
             {label: 'View', type: 'button', initialWidth: 135, typeAttributes: { label: 'View Details', name: 'view_details', title: 'Click to View Details'}},
             {label: 'Add Campaign', type: 'button', initialWidth: 135, typeAttributes: { label: 'Join', name: 'join', title: 'Join'}}
             
