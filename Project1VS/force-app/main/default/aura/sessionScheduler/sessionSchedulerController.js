@@ -13,6 +13,10 @@
         component.set("v.showWizard", true);
         component.set("v.campaignId", event.getSource().get("v.value"));
     },
+    goBack : function(component, event, helper) {
+        component.set("v.showList", true);
+        component.set("v.showWizard", false);
+    },
     submitSession : function(component, event, helper) {
         let session = component.get("c.addSession");
         session.setParams({whatId: component.get("v.campaignId"),
