@@ -24,12 +24,10 @@
                 break;
                 
             case 'join':
-               // alert("Clicked on join");
                 helper.addNewCampaign(row,cmp,event,helper);
                 break;
                 
             case 'unjoin':
-               // alert("Clicked on delete");
                 helper.deleteCampaign(row,cmp,event,helper);
                 break;
                 
