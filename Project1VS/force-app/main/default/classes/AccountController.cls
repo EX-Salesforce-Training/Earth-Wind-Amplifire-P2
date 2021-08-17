@@ -9,7 +9,26 @@ public class AccountController{
     }
     
 
+
+=======
+    @AuraEnabled
+    public static List <User> fetchUsers(){
+        List<User> usersList = [SELECT Name from User];
+        system.debug(usersList);
+        return usersList;
+    } 
     
+    
+    @AuraEnabled
+    public static void freezeUser(String userName){
+        
+        User userObject = [SELECT Name, User_Rating__c from User where Name=:userName];
+        userObject.User_Rating__c='Low';
+        
+        insert userObject;
+    }
+    
+
    
     @AuraEnabled
      public static List <DndCampaign__c> fetchCurrentCampaigns() {

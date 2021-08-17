@@ -77,6 +77,11 @@ Desc:
                     </aura:if>
                     
                     <aura:if isTrue="{! and(not(v.subPlan == null), v.subPlan.Cancelled_Subscription__c) }">
+                        <p style="margin-top: 0.5rem;">Your subscription expires on {! v.subPlan.Expiration_Date__c }.
+                            By re-enabling your subscription you are giving us permission to automatically renew your subscription
+                            plan on that date.
+                        </p>
+                        
                         <lightning:button type="submit" class="submit-button">
                             Enable Subscription
                         </lightning:button>

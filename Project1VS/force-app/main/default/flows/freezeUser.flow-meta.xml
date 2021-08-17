@@ -41,7 +41,7 @@
                         <stringValue>Picklist</stringValue>
                     </value>
                 </processMetadataValues>
-                <leftValueReference>myVariable_current.Rating__c</leftValueReference>
+                <leftValueReference>myVariable_current.User_Rating__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <stringValue>Low</stringValue>
