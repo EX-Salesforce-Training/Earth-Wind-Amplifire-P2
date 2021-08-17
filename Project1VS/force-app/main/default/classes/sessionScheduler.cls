@@ -1,12 +1,16 @@
-/*
- * Name: sessionScheduler.apxc
+/**************************************************************************
+ *
+ * Name: sessionScheduler
  * Author: Gregory Mannerberg (gregory.mannerberg@revature.net)
- * Created Date: 8/11/2021
- * Last Modified Date: 8/11/2021
+ * Created: 8/11/2021
+ * Updated: 08/17/2021
  * Description: Handles scheduling a session for a DnDCampaign
+ *
+ **************************************************************************
  */
 public with sharing class sessionScheduler {
 
+    // Gets all of the current user's d&d campaigns
     @AuraEnabled
     public static List<DnDCampaign__c> getDnDCampaigns() {
         Id userId = System.UserInfo.getUserId();
@@ -14,6 +18,7 @@ public with sharing class sessionScheduler {
         return campaigns;
     }
     
+    // Creates calendar events for a d&d sessions
     @AuraEnabled
     public static String addSession(Id whatId, Datetime startTime, Datetime endTime, Boolean repeat, Date endRepeatDate, String repeatType, Integer frequency,
                                     List<Boolean> repeatDayOfWeek, String endType, Integer numRepeats, String monthlyWhich, String monthlyWhichDay, Integer monthDay) {
