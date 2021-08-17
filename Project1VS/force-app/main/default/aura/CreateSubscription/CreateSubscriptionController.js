@@ -12,6 +12,13 @@
             if(response.getState() === 'SUCCESS') {
                 if(response.getReturnValue()) {
                 	helper.toggleSuccessMessage(component, 'Success! You have created a new subscription.');
+                    const retrievalAction = component.get('c.retrieveCurrentUserSubPlan');
+                    retrievalAction.setCallback(this, function(response) {
+                        if(response.getState() === 'SUCCESS') {
+                            component.set('v.subPlan', response.getReturnValue());
+                        }
+                    });
+        $A.enqueueAction(retrievalAction);
                 } else {
                     helper.toggleErrorMessage(component, 'Error! Something went wrong.');
                 }

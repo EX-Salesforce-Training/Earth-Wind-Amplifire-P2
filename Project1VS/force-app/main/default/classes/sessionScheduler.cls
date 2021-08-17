@@ -67,6 +67,7 @@ public with sharing class sessionScheduler {
                 if (endType == 'none') {
                     endRepeatDate = startTime.date().addYears(1);
                     Date scheduleDate = startTime.date().addDays(1);
+                    Integer i = 1;
                     while (scheduleDate <= endRepeatDate) {
                         Datetime scheduledStart = Datetime.newInstance(scheduleDate, startTime.time());
                         if (repeatDayOfWeek[Math.mod(Integer.valueOf(scheduledStart.format('u')),7)]) {
@@ -77,33 +78,43 @@ public with sharing class sessionScheduler {
                             session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
                             sessions.add(session);
                         }
+                        i++;
                         scheduleDate = scheduleDate.addDays(1);
+                        if (i == 7) {
+                            i = 0;
+                            scheduleDate = scheduleDate.addDays(7*(frequency-1));
+                        }                                               
                     }
                 }
                 else if (endType == 'after') {
                     Date scheduleDate = startTime.date().addDays(1);
-                    Integer i=0;
-                    while (i<numRepeats) {
+                    Integer i = 1;
+                    Integer repeats = 0;
+                    while (repeats<numRepeats) {
                         Datetime scheduledStart = Datetime.newInstance(scheduleDate, startTime.time());
                         if (repeatDayOfWeek[Math.mod(Integer.valueOf(scheduledStart.format('u')),7)]) {
-                            system.debug('weekday: ' + Integer.valueOf(scheduledStart.format('u')));
                             Event session = new Event();
                             session.OwnerId = System.UserInfo.getUserId();
                             session.WhatId = whatId;                           
                             session.StartDateTime = scheduledStart;
                             session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
                             sessions.add(session);
-                            i++;
+                            repeats++;
                         }
+                        i++;
                         scheduleDate = scheduleDate.addDays(1);
+                        if (i == 7) {
+                            i = 0;
+                            scheduleDate = scheduleDate.addDays(7*(frequency-1));
+                        } 
                     }
                 }
                 else if (endType == 'on') {
                     Date scheduleDate = startTime.date().addDays(1);
+                    Integer i = 1;
                     while (scheduleDate <= endRepeatDate) {
                         Datetime scheduledStart = Datetime.newInstance(scheduleDate, startTime.time());
                         if (repeatDayOfWeek[Math.mod(Integer.valueOf(scheduledStart.format('u')),7)]) {
-                            system.debug('weekday: ' + Integer.valueOf(scheduledStart.format('u')));
                             Event session = new Event();
                             session.OwnerId = System.UserInfo.getUserId();
                             session.WhatId = whatId;                           
@@ -111,7 +122,12 @@ public with sharing class sessionScheduler {
                             session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
                             sessions.add(session);
                         }
+                        i++;
                         scheduleDate = scheduleDate.addDays(1);
+                        if (i == 7) {
+                            i = 0;
+                            scheduleDate = scheduleDate.addDays(7*(frequency-1));
+                        }                                               
                     }
                 }
             }
