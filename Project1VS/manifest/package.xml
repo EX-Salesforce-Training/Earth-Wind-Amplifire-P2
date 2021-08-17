@@ -43,6 +43,7 @@
 		<members>Realm__c</members>
 		<members>Region__c</members>
 		<members>Session__c</members>
+		<members>Subscription_Plan__c</members>
 		<members>User</members>
 		<name>CustomObject</name>
 	</types>
