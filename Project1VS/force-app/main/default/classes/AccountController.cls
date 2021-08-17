@@ -8,6 +8,9 @@ public class AccountController{
         return ccList;
     }
     
+
+
+=======
     @AuraEnabled
     public static List <User> fetchUsers(){
         List<User> usersList = [SELECT Name from User];
@@ -25,7 +28,8 @@ public class AccountController{
         insert userObject;
     }
     
-    
+
+   
     @AuraEnabled
      public static List <DndCampaign__c> fetchCurrentCampaigns() {
          //Qyery 10 accounts
