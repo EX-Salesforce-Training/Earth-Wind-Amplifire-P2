@@ -25,8 +25,7 @@ public class AccountController{
         insert userObject;
     }
     
-
-   
+    
     @AuraEnabled
      public static List <DndCampaign__c> fetchCurrentCampaigns() {
          //Qyery 10 accounts

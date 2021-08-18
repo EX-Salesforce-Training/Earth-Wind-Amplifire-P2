@@ -1,14 +1,3 @@
-/*******************************************************************************
- *
- * Name: sessionSchedulerTest 
- * Author: Gregory Mannerberg (gregory.mannerberg@revature.net)
- * Created: 08/16/2021
- * Updated: 08/17/2021
- * Description: Tests for the session scheduler
- *
- *******************************************************************************
- */
-
 @isTest
 private class sessionSchedulerTest {
 
@@ -23,7 +12,6 @@ private class sessionSchedulerTest {
         insert campaign;
     }
     
-    // Test getting a campaign
     @isTest
     static void testGetDnDCampaignsSingle() {
         setup();
@@ -32,7 +20,6 @@ private class sessionSchedulerTest {
         System.assertEquals('test campaign', campList[0].Campaign_Name__c);
     }
     
-    // Test creating a single session event
     @isTest
     static void testaddSessionSingle() {
         setup();
@@ -47,71 +34,8 @@ private class sessionSchedulerTest {
         System.assertEquals(endTime, e.EndDateTime);
     }
     
-    // Test repeating a session daily with the default end date
     @isTest
-    static void testRepeatingDayNoneEvent() {
-        setup();
-        DnDCampaign__c campaign = [SELECT Id FROM DnDCampaign__c LIMIT 1];
-        Datetime startTime = Datetime.now().addHours(1);
-        Datetime endTime = startTime.addHours(2);
-        sessionScheduler.addSession(campaign.Id, startTime, endTime, true, null, 'daily', 1, null, 'none', null, null, null, null);
-        List<Event> sessions = [SELECT WhatId, StartDateTime, EndDateTime FROM Event];
-        System.assertEquals(366, sessions.size());
-    }
-    
-    // Test repeating a session daily with an entered end date
-    @isTest
-    static void testRepeatingDayOnEvent() {
-        setup();
-        DnDCampaign__c campaign = [SELECT Id FROM DnDCampaign__c LIMIT 1];
-        Datetime startTime = Datetime.now().addHours(1);
-        Datetime endTime = startTime.addHours(2);
-        Date endRepeatDate = startTime.date().addDays(14);
-        sessionScheduler.addSession(campaign.Id, startTime, endTime, true, endRepeatDate, 'daily', 1, null, 'on', null, null, null, null);
-        List<Event> sessions = [SELECT WhatId, StartDateTime, EndDateTime FROM Event];
-        System.assertEquals(15, sessions.size());
-    }
-    
-    // Test repeating a session daily for a given number of sessions
-    @isTest
-    static void testRepeatingDayAfterEvent() {
-        setup();
-        DnDCampaign__c campaign = [SELECT Id FROM DnDCampaign__c LIMIT 1];
-        Datetime startTime = Datetime.now().addHours(1);
-        Datetime endTime = startTime.addHours(2);
-        Integer numRepeats = 10;
-        sessionScheduler.addSession(campaign.Id, startTime, endTime, true, null, 'daily', 1, null, 'after', numRepeats, null, null, null);
-        List<Event> sessions = [SELECT WhatId, StartDateTime, EndDateTime FROM Event];
-        System.assertEquals(11, sessions.size());
-    }
-    
-    // Test repeating a session weekly with the default end date
-    @isTest
-    static void testRepeatingWeekNoneEvent() {
-        setup();
-        DnDCampaign__c campaign = [SELECT Id FROM DnDCampaign__c LIMIT 1];
-        Datetime startTime = Datetime.now().addHours(1);
-        Datetime endTime = startTime.addHours(2);
-        sessionScheduler.addSession(campaign.Id, startTime, endTime, true, null, 'weekly', 1, new List<Boolean>{true, false, false, false, false, false, false}, 'none', null, null, null, null);
-        List<Event> sessions = [SELECT WhatId, StartDateTime, EndDateTime FROM Event];
-        System.assertEquals(53, sessions.size());
-    }
-    
-    // Test repeating a session weekly for a given number of sessions
-    @isTest
-    static void testRepeatingWeekAfterEvent() {
-        setup();
-        DnDCampaign__c campaign = [SELECT Id FROM DnDCampaign__c LIMIT 1];
-        Datetime startTime = Datetime.now().addHours(1);
-        Datetime endTime = startTime.addHours(2);
-        sessionScheduler.addSession(campaign.Id, startTime, endTime, true, null, 'weekly', 1, new List<Boolean>{true, false, false, false, false, false, false}, 'after', 3, null, null, null);
-        List<Event> sessions = [SELECT WhatId, StartDateTime, EndDateTime FROM Event];
-        System.assertEquals(4, sessions.size());
-    }
-    
-    // Test repeating a session weekly with an entered end date
-    @isTest
-    static void testRepeatingWeekOnEvent() {
+    static void testRepeatingEvent() {
         setup();
         DnDCampaign__c campaign = [SELECT Id FROM DnDCampaign__c LIMIT 1];
         Datetime startTime = Datetime.now().addHours(1);
@@ -120,42 +44,5 @@ private class sessionSchedulerTest {
         sessionScheduler.addSession(campaign.Id, startTime, endTime, true, endRepeatDate, 'weekly', 1, new List<Boolean>{true, false, false, false, false, false, false}, 'on', null, null, null, null);
         List<Event> sessions = [SELECT WhatId, StartDateTime, EndDateTime FROM Event];
         System.assertEquals(3, sessions.size());
-    }
-    
-    // Test repeating a session monthly with the default end date
-    @isTest
-    static void testRepeatingMonthNoneEvent() {
-        setup();
-        DnDCampaign__c campaign = [SELECT Id FROM DnDCampaign__c LIMIT 1];
-        Datetime startTime = Datetime.now().addHours(1);
-        Datetime endTime = startTime.addHours(2);
-        sessionScheduler.addSession(campaign.Id, startTime, endTime, true, null, 'monthly', 1, null, 'none', null, 'none', null, null);
-        List<Event> sessions = [SELECT WhatId, StartDateTime, EndDateTime FROM Event];
-        System.assertEquals(13, sessions.size());
-    }
-    
-    // Test repeating a session monthly for a given number of sessions
-    @isTest
-    static void testRepeatingMonthAfterEvent() {
-        setup();
-        DnDCampaign__c campaign = [SELECT Id FROM DnDCampaign__c LIMIT 1];
-        Datetime startTime = Datetime.now().addHours(1);
-        Datetime endTime = startTime.addHours(2);
-        sessionScheduler.addSession(campaign.Id, startTime, endTime, true, null, 'monthly', 1, null, 'after', 4, 'none', null, null);
-        List<Event> sessions = [SELECT WhatId, StartDateTime, EndDateTime FROM Event];
-        System.assertEquals(5, sessions.size());
-    }
-    
-    // Test repeating a session monthly with an entered end date
-    @isTest
-    static void testRepeatingMonthOnEvent() {
-        setup();
-        DnDCampaign__c campaign = [SELECT Id FROM DnDCampaign__c LIMIT 1];
-        Datetime startTime = Datetime.now().addHours(1);
-        Datetime endTime = startTime.addHours(2);
-        Date endRepeatDate = startTime.date().addMonths(4);
-        sessionScheduler.addSession(campaign.Id, startTime, endTime, true, endRepeatDate, 'monthly', 1, null, 'on', null, 'none', null, null);
-        List<Event> sessions = [SELECT WhatId, StartDateTime, EndDateTime FROM Event];
-        System.assertEquals(5, sessions.size());
     }
 }

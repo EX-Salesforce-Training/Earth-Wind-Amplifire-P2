@@ -21,7 +21,9 @@ Desc:
     <!-- success modal -->
     <aura:handler name="closeModal" event="c:closeModal" action="{! c.closeModal }" />
     
-    <c:SuccessModal isOpen="{! v.submittedSuccessfully}" />
+    <c:SuccessModal isOpen="{! v.submittedSuccessfully}">
+        Your submission has been accepted. We will let you reach out to you in the next 7 business days.
+    </c:SuccessModal>
     
     <!-- error modal -->
     <c:ErrorModal isOpen="{! v.errorMessage != '' }">
@@ -87,7 +89,7 @@ Desc:
                     </aura:renderIf>
                     
                     <div class="submit-wrapper">
-                    	<lightning:button class="submit" type="submit" name="submit">Submit</lightning:button>
+                    	<lightning:button type="submit" name="submit">Submit</lightning:button>
                     </div>
                 </form>
             </lightning:card> 

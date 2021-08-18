@@ -5,6 +5,6 @@
     <label>Star Queue</label>
     <queue>Star_Queue</queue>
     <sharedTo>
-        <allInternalUsers></allInternalUsers>
+        <allInternalUsers/>
     </sharedTo>
 </ListView>

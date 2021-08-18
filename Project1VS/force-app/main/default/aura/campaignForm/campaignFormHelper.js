@@ -3,20 +3,8 @@
         component.set('v.mycolumns', [
             {label: 'Campaign Name', fieldName: 'Campaign_Name__c', type: 'text'},
             {label: 'Status', fieldName: 'Status__c', type: 'text'},
-
             {label: 'Summary', fieldName: 'Summary__c', type: 'text'},
-            {label: 'Add Campaign', type: 'button', initialWidth: 135, typeAttributes: { label: 'Join', name: 'join', title: 'Join'}},           
-
-
-            {label: 'Summary', fieldName: 'Summary__c', type: 'text'},
-
-            {label: 'Images', fieldName: 'Status__c', type: 'Image'},
-            {label: 'Summary', fieldName: 'Summary__c', type: 'text'},
-            {label: 'View', type: 'button', initialWidth: 135, typeAttributes: { label: 'View Details', name: 'view_details', title: 'Click to View Details'}},
-
-            {label: 'Add Campaign', type: 'button', initialWidth: 135, typeAttributes: { label: 'Join', name: 'join', title: 'Join'}}
-            
-
+            {label: 'Add Campaign', type: 'button', initialWidth: 135, typeAttributes: { label: 'Join', name: 'join', title: 'Join'}}            
         ]);
         var action = component.get("c.fetchCampaigns");
         action.setParams({
@@ -36,9 +24,6 @@
             {label: 'Campaign Name', fieldName: 'Campaign_Name__c', type: 'text'},
             {label: 'Status', fieldName: 'Status__c', type: 'text'},
             {label: 'Summary', fieldName: 'Summary__c', type: 'text'},
-
-            {label: 'View', type: 'button', initialWidth: 135, typeAttributes: { label: 'View Details', name: 'view_details', title: 'Click to View Details'}},
-
             {label: 'Exit', type: 'button', initialWidth: 135, typeAttributes: { label: 'Exit', name: 'unjoin', title: 'exit'}}
         ]);
         var currentCampaigns = component.get("c.fetchCurrentCampaigns") ;
@@ -62,7 +47,6 @@
         var action = component.get("c.deleteCampaign");
         
         var newRecord= row.Campaign_Name__c;
-
         action.setParams({
             "recordName":newRecord
         });
@@ -70,7 +54,7 @@
         action.setCallback(this,function(response){
             var state= response.getState();
             if(state=="SUCCESS"){
-
+                // alert("Delete succesfull");
             }
         })
         $A.enqueueAction(action);
@@ -79,10 +63,9 @@
     
     addNewCampaign: function(row,component,event,helper){
         var newRecord= row.Campaign_Name__c;
-
         var action = component.get("c.insertNewCampaign");
         action.setParams({
-
+            // "The Insane Adventure";
             "recordName":newRecord
         })
         
@@ -91,7 +74,7 @@
             
             if(state==="SUCCESS"){
                 
-
+                // alert("Submit succesful");
             }
             
         });
