@@ -10,7 +10,7 @@
         })
         $A.enqueueAction(partyList);
     },
-       User : function(component, event, helper) {
+    User : function(component, event, helper) {
         console.log("user");
         let User = component.get("c.UserInfo");
         User.setCallback(this, function(response){
@@ -21,10 +21,10 @@
         })
         $A.enqueueAction(User);
     },
-     Race : function(component, event, helper) {
+    Race : function(component, event, helper) {
         console.log("Race");
         let rList = component.get("c.getRaceOptions");
-         console.log(rList);
+        console.log(rList);
         rList.setCallback(this, function(response){
             if(response.getState() === "SUCCESS"){
                 component.set("v.Race", response.getReturnValue());
@@ -36,25 +36,25 @@
     },
     toggleRaceTooltip : function(cmp, evt, hlp) {
         
-       hlp.toggleTooltip(cmp, "race-tooltip");
-	},
+        hlp.toggleTooltip(cmp, "race-tooltip");
+    },
     toggleAttributesTooltip : function(cmp, evt, hlp) {
         hlp.toggleTooltip(cmp, "attributes-tooltip");
-	},
+    },
     toggleClassTooltip : function(cmp, evt, hlp) {
         hlp.toggleTooltip(cmp, "class-tooltip");
-	},
-    	save : function(component,event,helper){
+    },
+    save : function(component,event,helper){
         
         var action = component.get("c.apexSave"); 
         action.setCallback(this, function(action) {                
-           $A.get('e.force:refreshView').fire(); 
+            $A.get('e.force:refreshView').fire(); 
         }); 
         $A.enqueueAction(action); 
     },
-
+    
     /*page refresh after data save*/    
     isRefreshed: function(component, event, helper) {
-        location.reload();
-    },
- })
+       			location.reload(); 
+        },
+        })

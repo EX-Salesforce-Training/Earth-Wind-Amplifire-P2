@@ -1,3 +1,19 @@
+<!--
+ * Name: Joe Wilkerson
+ * Project2: DnD
+ * Date: 8/16/2021
+ * Description: VisualForce page for User information
+ * Uses User Standard Controller with a custom Controller extension
+ * 
+ * Displays user info in editable fields and allows them to be updated.
+ *
+ * Displays list of characters related to user and allows them to be updated
+ * as well as the creation of new characters.
+ * Changed it to a aura component
+-->
+
+
+
 <aura:component controller="PlayerAura" >
     <aura:attribute name="partyList" type="Character__c[]"/>
     <aura:attribute name="User" type="User"/>
@@ -6,16 +22,8 @@
     <aura:handler name="init" value="{!this}" action="{!c.User}"/>
     <aura:handler name="init" value="{!this}" action="{!c.Race}"/>
     <aura:handler event="force:refreshView" action="{!c.isRefreshed}" />
-    
+    <div style="text-align:center;" ><p><b>Player Characters</b></p></div>
     <div>
-        <div class="container">
-            <img class="image" src="{!$Resource.dnddice}"/>
-            <div class="overlay">
-            	<div class="text"><p><b>Player Characters</b></p></div>
-            </div>
-        </div>
-    </div>
-    <div >
         <p style="text-align:center;">Name: {!v.User.Name}</p>
         <p style="text-align:center;">Username: {!v.User.Username}</p>
         <p style="text-align:center;">Email: {!v.User.Email}</p>
@@ -105,7 +113,8 @@
             <lightning:inputField fieldName="Intelligence__c"/>
             <lightning:inputField fieldName="Charisma__c"/>
             <lightning:inputField fieldName="Party__c"/>
-            <lightning:inputField fieldName="General_Notes__c"/>    
+            <lightning:inputField fieldName="General_Notes__c"/>
+            <lightning:inputField fieldName="User__c" value="{!v.User.Id}"/>
             <lightning:button type="submit"
                               name="Submit"
                               label="Create Character" class="button"
