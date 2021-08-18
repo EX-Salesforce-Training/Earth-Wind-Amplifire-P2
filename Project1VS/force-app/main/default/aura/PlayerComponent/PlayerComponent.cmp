@@ -6,15 +6,8 @@
     <aura:handler name="init" value="{!this}" action="{!c.User}"/>
     <aura:handler name="init" value="{!this}" action="{!c.Race}"/>
     <aura:handler event="force:refreshView" action="{!c.isRefreshed}" />
-    
-    <div>
-        <div class="container">
-            <img class="image" src="{!$Resource.dnddice}"/>
-            <div class="overlay">
-                <div class="text"><p><b>Player Characters</b></p></div>
-            </div>
-        </div>
-    </div>
+   
+  	<div style="text-align:center"><p><b>Player Characters</b></p></div>
     <div >
         <p style="text-align:center;">Name: {!v.User.Name}</p>
         <p style="text-align:center;">Username: {!v.User.Username}</p>
@@ -94,7 +87,8 @@
                             <lightning:inputField fieldName="Intelligence__c"/>
                             <lightning:inputField fieldName="Charisma__c"/>
                             <lightning:inputField fieldName="Party__c"/>
-                            <lightning:inputField fieldName="General_Notes__c"/>    
+                            <lightning:inputField fieldName="General_Notes__c"/>
+                            <lightning:inputField fieldName="User__c" value="{!v.User.Id}"/>
                             <lightning:button type="submit"
                                               name="Submit"
                                               label="Create Character" class="button"
