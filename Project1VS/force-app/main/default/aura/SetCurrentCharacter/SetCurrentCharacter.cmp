@@ -1,0 +1,38 @@
+<aura:component controller="SetCurrentCharacterController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="userCharacters" type="Character__c[]" />
+    <aura:attribute name="selectedCharacter" type="Character__c" />
+    <aura:attribute name="submittedSuccessfully" type="Boolean" default="false" />
+    <aura:attribute name="errorMessage" type="String" default='' />
+    <aura:handler name="init" value="{!this}" action="{! c.retrieveCurrentUserCharacters }" />
+    
+    <c:SuccessModal isOpen="{! v.submittedSuccessfully}">
+        You have successfully set your default character.
+    </c:SuccessModal>
+    
+    <c:ErrorModal isOpen="{! v.errorMessage != '' }">
+        {! v.errorMessage }
+    </c:ErrorModal>
+    
+    <Lightning:card>
+        <aura:if isTrue="{! empty(v.userCharacters) }">
+            <p>
+                You have no characters created. Head on over to the character creation
+                page to make one.
+            </p>
+        </aura:if>
+        
+        <aura:if isTrue="{! not(empty(v.userCharacters)) }">
+            <form onsubmit="{! c.setDefault }">
+                <h2>Select a default character for your user.</h2>
+                <lightning:select aura:id="Character" label="Character" required="true">
+                    <aura:iteration items="{! v.userCharacters }" var="char">
+                        <option value="{! char.Id }">{! char.Name }</option>
+                    </aura:iteration>
+                </lightning:select>
+                
+                <lightning:button type="Submit">Submit</lightning:button>
+            </form>
+        </aura:if>
+        
+    </Lightning:card>
+</aura:component>

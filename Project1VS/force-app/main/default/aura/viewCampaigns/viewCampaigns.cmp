@@ -1,11 +1,9 @@
 <aura:component  controller="AccountController" implements="forceCommunity:availableForAllPageTypes" access="global">
     
     <aura:handler name="init" value="{!this}" action="{!c.fetchCampaign}"/>
-    
     <aura:attribute type="Campaign[]" name="ccList"/>
     
     <lightning:accordion aura:id="accordion" activeSectionName="A">
-        
         <aura:iteration items="{!v.ccList}" var ="campaign">
             <lightning:accordionSection name="A" label="{!campaign.Name}">
                 <aura:set attribute="actions">

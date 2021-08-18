@@ -10,7 +10,6 @@
 	margin: 0;
 	padding: 0;
 	font-size: 100%;
-	background-color:#DdDdDd;
 }
 
 .THIS .logo {
@@ -233,17 +232,16 @@
 
 .THIS .submit {
 	margin-top: 1rem;
-    background-color: #ddd;
-    transition: background-color 0.25s;
+
 }
 
 .THIS .submit:hover {
     background-color: white;
-    transition: background-color 0.25s;
+
 }
 
 .THIS .card-bg-color {
-    background-color: #bbb;
+
 }
 
 .THIS .hr-small-margin {
