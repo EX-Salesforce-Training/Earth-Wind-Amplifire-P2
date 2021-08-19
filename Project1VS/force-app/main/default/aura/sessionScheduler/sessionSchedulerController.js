@@ -50,6 +50,12 @@
             if (response.getState() === 'SUCCESS') {
                 component.set("v.showList", true);
                 component.set("v.showWizard", false);
+                let refresh = $A.get('e.force:navigateToURL');
+                refresh.setParams({
+                    "url": "/s/calendar"
+                });
+                refresh.fire();
+                //$A.get('e.force:refreshView').fire();
             }
         })
         $A.enqueueAction(session);

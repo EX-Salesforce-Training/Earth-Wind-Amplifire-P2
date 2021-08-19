@@ -26,6 +26,7 @@ public with sharing class sessionScheduler {
         Event e = new Event();
         e.OwnerId = System.UserInfo.getUserId();
         e.WhatId = whatId;
+        e.Subject = 'D&D Session';
         e.StartDateTime = startTime;
         e.EndDateTime = endTime;
         sessions.add(e);
@@ -37,6 +38,7 @@ public with sharing class sessionScheduler {
                         Event session = new Event();
                         session.OwnerId = System.UserInfo.getUserId();
                         session.WhatId = whatId;
+                        e.Subject = 'D&D Session';
                         Datetime scheduledStart = Datetime.newInstance(scheduleDate, startTime.time());
                         session.StartDateTime = scheduledStart;
                         session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
@@ -50,6 +52,7 @@ public with sharing class sessionScheduler {
                         Event session = new Event();
                         session.OwnerId = System.UserInfo.getUserId();
                         session.WhatId = whatId;
+                        e.Subject = 'D&D Session';
                         Datetime scheduledStart = Datetime.newInstance(scheduleDate, startTime.time());
                         session.StartDateTime = scheduledStart;
                         session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
@@ -61,6 +64,7 @@ public with sharing class sessionScheduler {
                         Event session = new Event();
                         session.OwnerId = System.UserInfo.getUserId();
                         session.WhatId = whatId;
+                        e.Subject = 'D&D Session';
                         Datetime scheduledStart = Datetime.newInstance(scheduleDate, startTime.time());
                         session.StartDateTime = scheduledStart;
                         session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
@@ -78,7 +82,8 @@ public with sharing class sessionScheduler {
                         if (repeatDayOfWeek[Math.mod(Integer.valueOf(scheduledStart.format('u')),7)]) {
                             Event session = new Event();
                             session.OwnerId = System.UserInfo.getUserId();
-                            session.WhatId = whatId;                           
+                            session.WhatId = whatId;
+                            e.Subject = 'D&D Session';
                             session.StartDateTime = scheduledStart;
                             session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
                             sessions.add(session);
@@ -100,7 +105,8 @@ public with sharing class sessionScheduler {
                         if (repeatDayOfWeek[Math.mod(Integer.valueOf(scheduledStart.format('u')),7)]) {
                             Event session = new Event();
                             session.OwnerId = System.UserInfo.getUserId();
-                            session.WhatId = whatId;                           
+                            session.WhatId = whatId; 
+                            e.Subject = 'D&D Session';
                             session.StartDateTime = scheduledStart;
                             session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
                             sessions.add(session);
@@ -122,7 +128,8 @@ public with sharing class sessionScheduler {
                         if (repeatDayOfWeek[Math.mod(Integer.valueOf(scheduledStart.format('u')),7)]) {
                             Event session = new Event();
                             session.OwnerId = System.UserInfo.getUserId();
-                            session.WhatId = whatId;                           
+                            session.WhatId = whatId;  
+                            e.Subject = 'D&D Session';
                             session.StartDateTime = scheduledStart;
                             session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
                             sessions.add(session);
@@ -144,6 +151,7 @@ public with sharing class sessionScheduler {
                             Event session = new Event();
                             session.OwnerId = System.UserInfo.getUserId();
                             session.WhatId = whatId;
+                            e.Subject = 'D&D Session';
                             Datetime scheduledStart = Datetime.newInstance(scheduleDate, startTime.time());
                             session.StartDateTime = scheduledStart;
                             session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
@@ -159,6 +167,7 @@ public with sharing class sessionScheduler {
                             Event session = new Event();
                             session.OwnerId = System.UserInfo.getUserId();
                             session.WhatId = whatId;
+                            e.Subject = 'D&D Session';
                             Datetime scheduledStart = Datetime.newInstance(scheduleDate, startTime.time());
                             session.StartDateTime = scheduledStart;
                             session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
@@ -172,6 +181,7 @@ public with sharing class sessionScheduler {
                             Event session = new Event();
                             session.OwnerId = System.UserInfo.getUserId();
                             session.WhatId = whatId;
+                            e.Subject = 'D&D Session';
                             Datetime scheduledStart = Datetime.newInstance(scheduleDate, startTime.time());
                             session.StartDateTime = scheduledStart;
                             session.EndDateTime = scheduledStart.addSeconds((Integer)((endTime.getTime() - startTime.getTime())/1000));
