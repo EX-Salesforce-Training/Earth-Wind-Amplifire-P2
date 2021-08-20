@@ -48,14 +48,23 @@ Desc:
             <div id="create-form" aura:id="create-form" class="tab">
                 <form onsubmit="{! c.createSub }">
                     <abbr>Create a new subscription plan</abbr>
-                    <lightning:select label='Subscription' name='createSubName'>
-                        <option>Annual Subscription ($250)</option>
-                        <option>Monthly Subscription ($25)</option>
-                    </lightning:select>
                     
-                    <lightning:button type="submit" class="submit-button">
-                        Submit
-                    </lightning:button>
+                    <aura:if isTrue="{! v.subPlan == null }">
+                        <lightning:select label='Subscription' name='createSubName'>
+                            <option>Annual Subscription ($250)</option>
+                            <option>Monthly Subscription ($25)</option>
+                        </lightning:select>
+                        
+                        <lightning:button type="submit" class="submit-button">
+                            Submit
+                        </lightning:button>
+                    </aura:if>
+                    <aura:if isTrue="{! v.subPlan != null }">
+                    	<p style="margin-top: 0.5rem;">
+                        	You already have a subscription plan with us. Click "Modify Subscription" to
+                            update it if you desire to do so.
+                        </p>
+                    </aura:if>
                 </form>
             </div>
             
