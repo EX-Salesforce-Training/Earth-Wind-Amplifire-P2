@@ -94,8 +94,7 @@
                             <lightning:inputField fieldName="Intelligence__c"/>
                             <lightning:inputField fieldName="Charisma__c"/>
                             <lightning:inputField fieldName="Party__c"/>
-                            <lightning:inputField fieldName="General_Notes__c"/>
-                            <lightning:inputField fieldName="User__c" value="{!v.User.Id}"/> 
+                            <lightning:inputField fieldName="General_Notes__c"/>    
                             <lightning:button type="submit"
                                               name="Submit"
                                               label="Create Character" class="button"

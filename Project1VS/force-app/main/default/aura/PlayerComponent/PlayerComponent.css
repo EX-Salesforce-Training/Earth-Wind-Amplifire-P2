@@ -1,8 +1,9 @@
-
-
 .THIS .tooltip-body-wrapper {
     position:absolute;
     right:59.5%;
     bottom:100%;
 }
 
+.THIS .ishidden {
+    display: none;
+}
