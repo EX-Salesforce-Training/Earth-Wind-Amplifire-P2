@@ -21,12 +21,16 @@
         setAction.setCallback(this, function(response) {
             if(response.getState() === 'SUCCESS') {
                 if(response.getReturnValue()) {
-  					component.set('v.submittedSuccessfully', true);                  
+  					component.set('v.submittedSuccessfully', true);
+                    // if this component is a sibling of the campaign form, update it
+                    // if not - firing this event does nothing
+                    const e = $A.get("e.c:updateCampaignFormEvent");
+                    e.fire();
                 } else {
                     component.set('v.errorMessage', 'Unable to update your default user at this time.');
                 }
             } else {
-                console.log('failure');
+                component.set('v.errorMessage', 'Unable to update your default user at this time.');
             }
         });
         $A.enqueueAction(setAction);
