@@ -57,4 +57,9 @@
     isRefreshed: function(component, event, helper) {
         location.reload();
     },
+    
+    toggleCreateForm: function(component, event, helper) {
+        const elem = component.find('create-form');
+        $A.util.toggleClass(elem, 'ishidden');
+    }
  })

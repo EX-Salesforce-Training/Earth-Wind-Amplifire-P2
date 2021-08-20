@@ -4,6 +4,13 @@
     bottom:100%;
 }
 
+.THIS .stats-tooltip-body-wrapper {
+    position:absolute;
+    right: 90.5%;
+    bottom:100%;
+}
+
+
 .THIS .ishidden {
     display: none;
 }
