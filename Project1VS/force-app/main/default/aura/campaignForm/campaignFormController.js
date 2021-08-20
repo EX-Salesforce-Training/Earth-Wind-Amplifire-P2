@@ -1,41 +1,29 @@
 ({
-    
-    fetchCurrent : function(component, event, helper){
-        helper.fetchCurrentHelper(component,event,helper)
+    setColumnFields: function(component, event, helper) {
+        helper.setColumnFields(component);
     },
     
-    fetchCC: function(component, event, helper){
-        helper.fetchCCHelper(component,event,helper)
+    fetchCampaignsFromCurrentCharacter: function(component, event, helper) {
+        helper.fetchCampaignsFromCurrentCharacter(component);
     },
     
-    getSelectedName:function(event) {
-        const selectedRows = event.detail.selectedRows;
-        // Display that fieldName of the selected rows
-        for (let i = 0; i < selectedRows.length; i++){
-            alert("You selected a row ");
-        }
+    fetchJoinableCampaigns: function(component, event, helper) {
+        helper.fetchJoinableCampaigns(component);
     },
-    handleRowAction: function (cmp, event, helper) {
-        var action = event.getParam('action');
-        var row = event.getParam('row');
-        switch (action.name) {
-            case 'view_details':
-                helper.showRowDetails(row);
-                break;
-                
-            case 'join':
-               // alert("Clicked on join");
-                helper.addNewCampaign(row,cmp,event,helper);
-                break;
-                
-            case 'unjoin':
-               // alert("Clicked on delete");
-                helper.deleteCampaign(row,cmp,event,helper);
-                break;
-                
-            default:
-                helper.showRowDetails(row);
-                break;
-        }
+    
+    fetchOtherCampaigns: function(component, event, helper) {
+        helper.fetchOtherCampaigns(component);
+    },
+            
+    fetchCharacter: function(component, event, helper) {
+		helper.fetchCharacter(component);
+    },
+            
+    update: function(component, event, helper) {
+		helper.update(component);
+    },
+    
+    handleRowAction: function (component, event, helper) {
+		helper.handleRowAction(component, event);
     }
 })

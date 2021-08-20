@@ -1,46 +1,57 @@
 <aura:component controller="AccountController" implements="forceCommunity:availableForAllPageTypes" access="global">
-    <aura:attribute type="Campaign[]" name="ccList"/>
-    <aura:attribute name="mycolumns" type="List"/>
-    <aura:attribute name="myCurrentcolumns" type="List"/>
-    <aura:attribute type="DnDCampaign__c[]" name="currentCampaignList"/>
     
-    <aura:handler name="init" value="{!this}" action="{!c.fetchCC}"/>
-    <aura:handler name="init" value="{!this}" action="{!c.fetchCurrent}"/>
+    <aura:attribute type="Map[]" name="currentCampaigns" />
+    <aura:attribute type="Map[]" name="joinableCampaigns" />
+    <aura:attribute type="Map[]" name="otherCampaigns" />
+    <aura:attribute name="joinableColumns" type="List"/>
+    <aura:attribute name="currentColumns" type="List"/>
+    <aura:attribute name="regularColumns" type="List" />
+    <aura:attribute name='currentCharacter' type="Character__c" />
     
-    <lightning:verticalNavigation>
-        <lightning:verticalNavigationSection label="All campaigns">
-        </lightning:verticalNavigationSection>
-    </lightning:verticalNavigation>
+    <aura:attribute name="successMessage" type="String" default='' />
+    <aura:attribute name="errorMessage" type="String" default='' />
     
-    <div class="slds-grid slds-grid_align-space slds-box">
-        <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
-            <!-- Auto Number -->
-            <lightning:outputField title="Campaigns" />
-        </div>
-    </div>
+    <aura:registerEvent name="updateCampaignFormEvent" type="c:updateCampaignFormEvent"/>
     
+    <aura:handler event="c:updateCampaignFormEvent" action="{! c.update }" />
+    <aura:handler name="init" value="{!this}" action="{!c.fetchCampaignsFromCurrentCharacter}" />
+    <aura:handler name="init" value="{!this}" action="{!c.fetchJoinableCampaigns}" />
+    <aura:handler name="init" value="{!this}" action="{!c.fetchOtherCampaigns}" />
+    <aura:handler name="init" value="{!this}" action="{!c.fetchCharacter}" />
+    <aura:handler name="init" value="{!this}" action="{!c.setColumnFields}" />
     
-    <lightning:datatable data="{! v.ccList }"
-                         columns="{! v.mycolumns }"
-                         keyField="id"
-                         hideCheckboxColumn="true"
-                         onrowaction="{!c.handleRowAction}"/>
+    <c:SuccessModal isOpen="{! successMessage == '' }">
+    	{! successMessage }
+    </c:SuccessModal>
     
-    <!-- the current campaign description -->
-    <lightning:verticalNavigation>
-        <lightning:verticalNavigationSection label="Current Campaign Description" />
-    </lightning:verticalNavigation>
-    
-    <div class="slds-grid slds-grid_align-space slds-box">
-        <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
-            <!-- Auto Number -->
-            <lightning:outputField title="Current Campaign Description" />
-        </div>
-    </div>
-    
-    <lightning:datatable data="{! v.currentCampaignList }"
-                         columns="{! v.myCurrentcolumns }"
-                         keyField="id"
-                         hideCheckboxColumn="true"
-                         onrowaction="{!c.handleRowAction}"/>     
+    <c:ErrorModal isOpen="{! errorMessage == '' }">
+    	{! errorMessage }
+    </c:ErrorModal>
+	
+    <aura:if isTrue="{! v.currentCharacter != null }">
+        <h1 class="slds-text-heading_large">Campaigns for {! v.currentCharacter.Name }</h1>
+        
+        <lightning:accordion>
+            <lightning:accordionSection label="Current Campaigns">
+                <lightning:datatable data="{! v.currentCampaigns }"
+                                     columns="{! v.currentColumns }"
+                                     keyField="id"
+                                     hideCheckboxColumn="true"
+                                     onrowaction="{!c.handleRowAction}"/> 
+            </lightning:accordionSection>
+            <lightning:accordionSection label="Joinable Campaigns">
+                <lightning:datatable data="{! v.joinableCampaigns }"
+                                     columns="{! v.joinableColumns }"
+                                     keyField="id"
+                                     hideCheckboxColumn="true"
+                                     onrowaction="{!c.handleRowAction}"/>
+            </lightning:accordionSection>
+            <lightning:accordionSection label="Unjoinable Campaigns">
+                <lightning:datatable data="{! v.otherCampaigns }"
+                                     columns="{! v.regularColumns }"
+                                     keyField="id"
+                                     hideCheckboxColumn="true" />
+            </lightning:accordionSection>
+        </lightning:accordion> 
+    </aura:if>
 </aura:component>
