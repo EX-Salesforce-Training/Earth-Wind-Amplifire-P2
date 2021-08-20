@@ -1,0 +1,8 @@
+body {
+    background-size: 100%;
+    /* Replace the url with the location of your static resource.
+       Should be like https://<your-domain>-developer-edition.na162.force.com/resource/<resource> */
+    background-image: url("https://brave-wolf-ws8sln-developer-edition.na162.force.com/resource/1629478441000/tavern?");
+    background-repeat: no-repeat;
+  	background-attachment: fixed;
+}
