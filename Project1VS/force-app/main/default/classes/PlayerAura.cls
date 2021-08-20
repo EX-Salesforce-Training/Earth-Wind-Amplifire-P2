@@ -11,7 +11,7 @@ public class PlayerAura {
     // grab character list and relatedparty
     @AuraEnabled
     public static List<Character__c> GetCharactersParty() {
-        List<character__c> characterList = [SELECT Id, Name, Party__r.Name FROM Character__c WHERE OwnerID =:userinfo.getuserId() ];
+        List<character__c> characterList = [SELECT Id, Name, Party__r.Name FROM Character__c WHERE User__c =:userinfo.getuserId() ];
         system.debug(characterList);
         return characterList;
     }
