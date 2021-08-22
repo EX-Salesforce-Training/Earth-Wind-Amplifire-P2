@@ -1,0 +1,19 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <lightning:card title="Dungeons &amp; Dragons">
+        <p class="slds-m-around_small">
+            Welcome to Dungeons &amp; Dragons, the official site of the popular out-of-game DnD
+            game organizer. We are committed to building a community of game-enthusiasts around the
+            country and we provide the tools to allow that community exist.
+        </p>
+        <p class="slds-m-around_small">   
+            If you are interested in joining our community, send us your information
+            on the <a href="/s/contact">contact</a> page and we'll get back to you within 7 business days.
+            If you are a dungeon master and you'd like to schedule a new session, head on over to the 
+            <a href="/s/calendar">calendar</a> page and you can schedule it from there. If you'd like to
+            create a new character or update your subscription with us, the <a href="/s/player">player</a> 
+            page may suit your fancy. If you'd like to join a campaign or view the parties available to join, 
+            head on over to the <a href="/s/campaign">campaign</a> or <a href="/s/party">party</a> pages 
+            respectively.
+        </p>
+    </lightning:card>
+</aura:component>

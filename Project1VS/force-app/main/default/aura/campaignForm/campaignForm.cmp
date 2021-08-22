@@ -21,37 +21,41 @@
     <aura:handler name="init" value="{!this}" action="{!c.setColumnFields}" />
     
     <c:SuccessModal isOpen="{! successMessage == '' }">
-    	{! successMessage }
+        {! successMessage }
     </c:SuccessModal>
     
     <c:ErrorModal isOpen="{! errorMessage == '' }">
-    	{! errorMessage }
+        {! errorMessage }
     </c:ErrorModal>
-	
+    
     <aura:if isTrue="{! v.currentCharacter != null }">
-        <h1 class="slds-text-heading_large">Campaigns for {! v.currentCharacter.Name }</h1>
-        
-        <lightning:accordion>
-            <lightning:accordionSection label="Current Campaigns">
-                <lightning:datatable data="{! v.currentCampaigns }"
-                                     columns="{! v.currentColumns }"
-                                     keyField="id"
-                                     hideCheckboxColumn="true"
-                                     onrowaction="{!c.handleRowAction}"/> 
-            </lightning:accordionSection>
-            <lightning:accordionSection label="Joinable Campaigns">
-                <lightning:datatable data="{! v.joinableCampaigns }"
-                                     columns="{! v.joinableColumns }"
-                                     keyField="id"
-                                     hideCheckboxColumn="true"
-                                     onrowaction="{!c.handleRowAction}"/>
-            </lightning:accordionSection>
-            <lightning:accordionSection label="Unjoinable Campaigns">
-                <lightning:datatable data="{! v.otherCampaigns }"
-                                     columns="{! v.regularColumns }"
-                                     keyField="id"
-                                     hideCheckboxColumn="true" />
-            </lightning:accordionSection>
-        </lightning:accordion> 
+        <lightning:card>
+            <div class="slds-m-around_medium">
+                <h1 class="slds-text-heading_large">Campaigns for {! v.currentCharacter.Name }</h1>
+                
+                <lightning:accordion>
+                    <lightning:accordionSection label="Current Campaigns">
+                        <lightning:datatable data="{! v.currentCampaigns }"
+                                             columns="{! v.currentColumns }"
+                                             keyField="id"
+                                             hideCheckboxColumn="true"
+                                             onrowaction="{!c.handleRowAction}"/> 
+                    </lightning:accordionSection>
+                    <lightning:accordionSection label="Joinable Campaigns">
+                        <lightning:datatable data="{! v.joinableCampaigns }"
+                                             columns="{! v.joinableColumns }"
+                                             keyField="id"
+                                             hideCheckboxColumn="true"
+                                             onrowaction="{!c.handleRowAction}"/>
+                    </lightning:accordionSection>
+                    <lightning:accordionSection label="Unjoinable Campaigns">
+                        <lightning:datatable data="{! v.otherCampaigns }"
+                                             columns="{! v.regularColumns }"
+                                             keyField="id"
+                                             hideCheckboxColumn="true" />
+                    </lightning:accordionSection>
+                </lightning:accordion> 
+            </div>
+        </lightning:card>
     </aura:if>
 </aura:component>

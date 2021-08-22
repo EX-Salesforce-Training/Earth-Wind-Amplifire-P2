@@ -1,0 +1,7 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <lightning:card>
+        <div class="slds-align_absolute-center">
+            <img src="{!$Resource.HeaderLogo}" class="slds-m-around_small" style="max-height: 25vh;" alt="DnD logo" />
+        </div>
+    </lightning:card>
+</aura:component>

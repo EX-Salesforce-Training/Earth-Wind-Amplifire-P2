@@ -36,194 +36,197 @@
     <aura:attribute name="monthDay" type="Integer" />
     
     <aura:handler name="init" value="{!this}" action="{!c.listCampaigns}"/>
-    <div class="slds-page-header">                                 
-        <h1 class="slds-page-header__title">Session Scheduler</h1>                                  
-    </div>
-    <aura:if isTrue="{!v.showList}">
-        <table class="slds-table slds-table_bordered slds-table_col-bordered">
-            <thead><tr><th>Your Campaigns</th></tr></thead>
-            <tbody>           
-                <aura:iteration items="{!v.campaigns}" var="campaign">
-                    <tr>
-                        <td>
-                            <lightning:button variant="base" label="{!campaign.Campaign_Name__c}" onclick="{!c.showWizard}" value="{!campaign.Id}"/>
-                        </td>
-                    </tr>
-                </aura:iteration>            
-            </tbody>
-        </table>
-    </aura:if>
     
-    <aura:if isTrue="{!v.showWizard}">
-        <div>
-            <lightning:input label="Start" value="{!v.startTime}" type="datetime" required="true"/>
-            <lightning:input label="End" value="{!v.endTime}" type="datetime" required="true"/>
-            <lightning:input label="Repeat" value="{!v.repeat}" type="checkbox" onchange="{!c.showRepeat}"/>
-            <!-- Repeat -->
-            <aura:if isTrue="{!v.repeat}">
-                <!-- Repeat Interval -->
-                <lightning:buttonGroup>
-                    <aura:if isTrue="{!v.dailySelected}" >
-                        <lightning:button variant="brand" label="Daily" onclick="{!c.showDailyOptions}" />
-                        <aura:set attribute="else" >
-                            <lightning:button label="Daily" onclick="{!c.showDailyOptions}" />
-                        </aura:set>
-                    </aura:if>
-                    <aura:if isTrue="{!v.weeklySelected}" >
-                        <lightning:button variant="brand" label="Weekly" onclick="{!c.showWeeklyOptions}" />
-                        <aura:set attribute="else" >
-                            <lightning:button label="Weekly" onclick="{!c.showWeeklyOptions}" />
-                        </aura:set>
-                    </aura:if>
-                    <aura:if isTrue="{!v.monthlySelected}" >
-                        <lightning:button variant="brand" label="Monthly" onclick="{!c.showMonthlyOptions}" />
-                        <aura:set attribute="else" >
-                            <lightning:button label="Monthly" onclick="{!c.showMonthlyOptions}" />
-                        </aura:set>
-                    </aura:if>
-                    <!--aura:if isTrue="{!v.yearlySelected}" >
+    <lightning:card>
+        <div class="slds-m-around_medium">
+            <div class="slds-page-header">                                 
+                <h1 class="slds-page-header__title">Session Scheduler</h1>                                  
+            </div>
+            <aura:if isTrue="{!v.showList}">
+                <table class="slds-table slds-table_bordered slds-table_col-bordered">
+                    <thead><tr><th>Your Campaigns</th></tr></thead>
+                    <tbody>           
+                        <aura:iteration items="{!v.campaigns}" var="campaign">
+                            <tr>
+                                <td>
+                                    <lightning:button variant="base" label="{!campaign.Campaign_Name__c}" onclick="{!c.showWizard}" value="{!campaign.Id}"/>
+                                </td>
+                            </tr>
+                        </aura:iteration>            
+                    </tbody>
+                </table>
+            </aura:if>
+            
+            <aura:if isTrue="{!v.showWizard}">
+                <div>
+                    <lightning:input label="Start" value="{!v.startTime}" type="datetime" required="true"/>
+                    <lightning:input label="End" value="{!v.endTime}" type="datetime" required="true"/>
+                    <lightning:input label="Repeat" value="{!v.repeat}" type="checkbox" onchange="{!c.showRepeat}"/>
+                    <!-- Repeat -->
+                    <aura:if isTrue="{!v.repeat}">
+                        <!-- Repeat Interval -->
+                        <lightning:buttonGroup>
+                            <aura:if isTrue="{!v.dailySelected}" >
+                                <lightning:button variant="brand" label="Daily" onclick="{!c.showDailyOptions}" />
+                                <aura:set attribute="else" >
+                                    <lightning:button label="Daily" onclick="{!c.showDailyOptions}" />
+                                </aura:set>
+                            </aura:if>
+                            <aura:if isTrue="{!v.weeklySelected}" >
+                                <lightning:button variant="brand" label="Weekly" onclick="{!c.showWeeklyOptions}" />
+                                <aura:set attribute="else" >
+                                    <lightning:button label="Weekly" onclick="{!c.showWeeklyOptions}" />
+                                </aura:set>
+                            </aura:if>
+                            <aura:if isTrue="{!v.monthlySelected}" >
+                                <lightning:button variant="brand" label="Monthly" onclick="{!c.showMonthlyOptions}" />
+                                <aura:set attribute="else" >
+                                    <lightning:button label="Monthly" onclick="{!c.showMonthlyOptions}" />
+                                </aura:set>
+                            </aura:if>
+                            <!--aura:if isTrue="{!v.yearlySelected}" >
                         <lightning:button variant="brand" label="Yearly" onclick="{!c.showYearlyOptions}" />
                         <aura:set attribute="else" >
                             <lightning:button label="Yearly" onclick="{!c.showYearlyOptions}" />
                         </aura:set>
                     </aura:if-->                   
-                </lightning:buttonGroup>
-                <!-- Daily Repeat -->
-                <aura:if isTrue="{!v.dailySelected}" >
-                    <lightning:select name="dailyDropdown" onchange="{!c.dailyDropdown}" class="slds-size_1-of-8">
-                        <option value="1">Every Day</option>
-                        <option value="2">Every Other Day</option>
-                        <option value="3">Every...</option>
-                    </lightning:select>
-                    <aura:if isTrue="{!v.dailyExtra}" >
-                        <lightning:select label="Day(s)" name="dailyExtraDropdown" onchange="{!c.dailyExtraDropdown}" class="slds-size_1-of-8">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                        </lightning:select>
-                    </aura:if>
-                </aura:if>
-                <!-- Weekly Repeat -->
-                <aura:if isTrue="{!v.weeklySelected}" >
-                    <lightning:select name="weeklyDropdown" onchange="{!c.weeklyDropdown}" class="slds-size_1-of-8">
-                        <option value="1">Every Week</option>
-                        <option value="2">Every Other Week</option>
-                        <option value="3">Every...</option>
-                    </lightning:select>
-                    <aura:if isTrue="{!v.weeklyExtra}" >
-                        <lightning:select label="Week(s)" name="weeklyExtraDropdown" onchange="{!c.weeklyExtraDropdown}" class="slds-size_1-of-8">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                        </lightning:select>
-                    </aura:if>
-                    <lightning:buttonGroup >
-                        <aura:if isTrue="{!v.repeatDayOfWeek[0]}" >
-                            <lightning:button variant="brand" label="Su" onclick="{!c.removeDay}" />
-                            <aura:set attribute="else" >
-                                <lightning:button label="Su" onclick="{!c.addDay}" />
-                            </aura:set>
+                        </lightning:buttonGroup>
+                        <!-- Daily Repeat -->
+                        <aura:if isTrue="{!v.dailySelected}" >
+                            <lightning:select name="dailyDropdown" onchange="{!c.dailyDropdown}" class="slds-size_1-of-8">
+                                <option value="1">Every Day</option>
+                                <option value="2">Every Other Day</option>
+                                <option value="3">Every...</option>
+                            </lightning:select>
+                            <aura:if isTrue="{!v.dailyExtra}" >
+                                <lightning:select label="Day(s)" name="dailyExtraDropdown" onchange="{!c.dailyExtraDropdown}" class="slds-size_1-of-8">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                </lightning:select>
+                            </aura:if>
                         </aura:if>
-                        <aura:if isTrue="{!v.repeatDayOfWeek[1]}" >
-                            <lightning:button variant="brand" label="M" onclick="{!c.removeDay}" />
-                            <aura:set attribute="else" >
-                                <lightning:button label="M" onclick="{!c.addDay}" />
-                            </aura:set>
+                        <!-- Weekly Repeat -->
+                        <aura:if isTrue="{!v.weeklySelected}" >
+                            <lightning:select name="weeklyDropdown" onchange="{!c.weeklyDropdown}" class="slds-size_1-of-8">
+                                <option value="1">Every Week</option>
+                                <option value="2">Every Other Week</option>
+                                <option value="3">Every...</option>
+                            </lightning:select>
+                            <aura:if isTrue="{!v.weeklyExtra}" >
+                                <lightning:select label="Week(s)" name="weeklyExtraDropdown" onchange="{!c.weeklyExtraDropdown}" class="slds-size_1-of-8">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                </lightning:select>
+                            </aura:if>
+                            <lightning:buttonGroup >
+                                <aura:if isTrue="{!v.repeatDayOfWeek[0]}" >
+                                    <lightning:button variant="brand" label="Su" onclick="{!c.removeDay}" />
+                                    <aura:set attribute="else" >
+                                        <lightning:button label="Su" onclick="{!c.addDay}" />
+                                    </aura:set>
+                                </aura:if>
+                                <aura:if isTrue="{!v.repeatDayOfWeek[1]}" >
+                                    <lightning:button variant="brand" label="M" onclick="{!c.removeDay}" />
+                                    <aura:set attribute="else" >
+                                        <lightning:button label="M" onclick="{!c.addDay}" />
+                                    </aura:set>
+                                </aura:if>
+                                <aura:if isTrue="{!v.repeatDayOfWeek[2]}" >
+                                    <lightning:button variant="brand" label="Tu" onclick="{!c.removeDay}" />
+                                    <aura:set attribute="else" >
+                                        <lightning:button label="Tu" onclick="{!c.addDay}" />
+                                    </aura:set>
+                                </aura:if>
+                                <aura:if isTrue="{!v.repeatDayOfWeek[3]}" >
+                                    <lightning:button variant="brand" label="W" onclick="{!c.removeDay}" />
+                                    <aura:set attribute="else" >
+                                        <lightning:button label="W" onclick="{!c.addDay}" />
+                                    </aura:set>
+                                </aura:if>
+                                <aura:if isTrue="{!v.repeatDayOfWeek[4]}" >
+                                    <lightning:button variant="brand" label="Th" onclick="{!c.removeDay}" />
+                                    <aura:set attribute="else" >
+                                        <lightning:button label="Th" onclick="{!c.addDay}" />
+                                    </aura:set>
+                                </aura:if>
+                                <aura:if isTrue="{!v.repeatDayOfWeek[5]}" >
+                                    <lightning:button variant="brand" label="F" onclick="{!c.removeDay}" />
+                                    <aura:set attribute="else" >
+                                        <lightning:button label="F" onclick="{!c.addDay}" />
+                                    </aura:set>
+                                </aura:if>
+                                <aura:if isTrue="{!v.repeatDayOfWeek[6]}" >
+                                    <lightning:button variant="brand" label="Sa" onclick="{!c.removeDay}" />
+                                    <aura:set attribute="else" >
+                                        <lightning:button label="Sa" onclick="{!c.addDay}" />
+                                    </aura:set>
+                                </aura:if>
+                            </lightning:buttonGroup>
                         </aura:if>
-                        <aura:if isTrue="{!v.repeatDayOfWeek[2]}" >
-                            <lightning:button variant="brand" label="Tu" onclick="{!c.removeDay}" />
-                            <aura:set attribute="else" >
-                                <lightning:button label="Tu" onclick="{!c.addDay}" />
-                            </aura:set>
-                        </aura:if>
-                        <aura:if isTrue="{!v.repeatDayOfWeek[3]}" >
-                            <lightning:button variant="brand" label="W" onclick="{!c.removeDay}" />
-                            <aura:set attribute="else" >
-                                <lightning:button label="W" onclick="{!c.addDay}" />
-                            </aura:set>
-                        </aura:if>
-                        <aura:if isTrue="{!v.repeatDayOfWeek[4]}" >
-                            <lightning:button variant="brand" label="Th" onclick="{!c.removeDay}" />
-                            <aura:set attribute="else" >
-                                <lightning:button label="Th" onclick="{!c.addDay}" />
-                            </aura:set>
-                        </aura:if>
-                        <aura:if isTrue="{!v.repeatDayOfWeek[5]}" >
-                            <lightning:button variant="brand" label="F" onclick="{!c.removeDay}" />
-                            <aura:set attribute="else" >
-                                <lightning:button label="F" onclick="{!c.addDay}" />
-                            </aura:set>
-                        </aura:if>
-                        <aura:if isTrue="{!v.repeatDayOfWeek[6]}" >
-                            <lightning:button variant="brand" label="Sa" onclick="{!c.removeDay}" />
-                            <aura:set attribute="else" >
-                                <lightning:button label="Sa" onclick="{!c.addDay}" />
-                            </aura:set>
-                        </aura:if>
-                    </lightning:buttonGroup>
-                </aura:if>
-                <!-- Monthly Repeat -->
-                <aura:if isTrue="{!v.monthlySelected}" >
-                    <lightning:select name="monthlyDropdown" onchange="{!c.monthlyDropdown}" class="slds-size_1-of-8">
-                        <option value="1">Every Month</option>
-                        <option value="2">Every Other Month</option>
-                        <option value="3">Every...</option>
-                    </lightning:select>
-                    <!--lightning:select name="monthlySpecific" onchange="{!c.monthlySpecific}" >
+                        <!-- Monthly Repeat -->
+                        <aura:if isTrue="{!v.monthlySelected}" >
+                            <lightning:select name="monthlyDropdown" onchange="{!c.monthlyDropdown}" class="slds-size_1-of-8">
+                                <option value="1">Every Month</option>
+                                <option value="2">Every Other Month</option>
+                                <option value="3">Every...</option>
+                            </lightning:select>
+                            <!--lightning:select name="monthlySpecific" onchange="{!c.monthlySpecific}" >
                         <option value="1">Specific Day</option>
                         <option value="2">Every...</option>
                     </lightning:select>
@@ -280,42 +283,42 @@
                             <option value="Saturday">Saturday</option>
                         </lightning:select>
                     </aura:if-->
-                </aura:if>
-                <aura:if isTrue="{!v.monthlyExtra}" >
-                    <!--aura:if isTrue="{!v.monthlySpecific}"-->
-                        <lightning:select label="Month(s)" name="monthlyExtraDropdown" onchange="{!c.monthlyExtraDropdown}" class="slds-size_1-of-8">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                        </lightning:select>
-                        <!--aura:set attribute="else">
+                        </aura:if>
+                        <aura:if isTrue="{!v.monthlyExtra}" >
+                            <!--aura:if isTrue="{!v.monthlySpecific}"-->
+                            <lightning:select label="Month(s)" name="monthlyExtraDropdown" onchange="{!c.monthlyExtraDropdown}" class="slds-size_1-of-8">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                            </lightning:select>
+                            <!--aura:set attribute="else">
                             <lightning:select onchange="{!c.monthlyWhich}">
                                 <option value="first">First</option>
                                 <option value="second">Second</option>
@@ -334,17 +337,19 @@
                             </lightning:select>
                         </aura:set>
                     </aura:if-->
-                </aura:if>
-                <lightning:radioGroup label="Series End Date"
-                                      options="{!v.endOptions}"
-                                      value="{!v.endType}"
-                                      type="radio"
-                                      title="Events in this series are added to your calendar when they're within one year of the current date."/>
-                <lightning:input label="Number of Events" type="integer" value="{!v.numRepeats}" disabled="{!v.endType != 'after'}" required="{!v.endType == 'after'}" class="slds-size_1-of-8"/>
-                <lightning:input label="Final Date" value="{!v.endRepeatDate}" type="date" disabled="{!v.endType != 'on'}" required="{!v.endType == 'on'}" class="slds-size_1-of-8"/> 
+                        </aura:if>
+                        <lightning:radioGroup label="Series End Date"
+                                              options="{!v.endOptions}"
+                                              value="{!v.endType}"
+                                              type="radio"
+                                              title="Events in this series are added to your calendar when they're within one year of the current date."/>
+                        <lightning:input label="Number of Events" type="integer" value="{!v.numRepeats}" disabled="{!v.endType != 'after'}" required="{!v.endType == 'after'}" class="slds-size_1-of-8"/>
+                        <lightning:input label="Final Date" value="{!v.endRepeatDate}" type="date" disabled="{!v.endType != 'on'}" required="{!v.endType == 'on'}" class="slds-size_1-of-8"/> 
+                    </aura:if>
+                    <lightning:button label="Submit" onclick="{!c.submitSession}"/>
+                    <lightning:button label="Cancel" onclick="{!c.goBack}"/>
+                </div>
             </aura:if>
-            <lightning:button label="Submit" onclick="{!c.submitSession}"/>
-            <lightning:button label="Cancel" onclick="{!c.goBack}"/>
         </div>
-    </aura:if>
+    </lightning:card>
 </aura:component>

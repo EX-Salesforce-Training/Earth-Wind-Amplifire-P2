@@ -1,0 +1,11 @@
+<aura:component controller="RandomMessageController" implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="message" type="String" default="loading..."/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.setMessage}"/>
+    
+	<lightning:card title="Random Lore">
+    	<blockquote class="slds-m-around_small">
+        	{! v.message }
+        </blockquote>
+    </lightning:card>
+</aura:component>

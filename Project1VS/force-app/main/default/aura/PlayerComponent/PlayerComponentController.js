@@ -59,7 +59,8 @@
     },
     
     toggleCreateForm: function(component, event, helper) {
-        const elem = component.find('create-form');
-        $A.util.toggleClass(elem, 'ishidden');
+        const elem = component.find('create-form-modal');
+        $A.util.toggleClass(elem, 'ishidden-modal');
+        $A.util.toggleClass(elem, 'isvisible-modal');
     }
  })

@@ -7,97 +7,124 @@
     <aura:handler name="init" value="{!this}" action="{!c.Race}"/>
     <aura:handler event="force:refreshView" action="{!c.isRefreshed}" />
     
-    <div>
-        <div class="container">
-            <img class="image" src="{!$Resource.dnddice}"/>
-            <div class="overlay">
-                <div class="text"><p><b>Player Characters</b></p></div>
+    <lightning:card>
+        <div class="slds-m-around_medium">
+            <div>
+                <div class="container">
+                    <img class="image" src="{!$Resource.dnddice}"/>
+                    <div class="header-column slds-m-top_small slds-align_absolute-center">
+                        <lightning:button variant="brand-outline" onclick="{! c.toggleCreateForm }">Create New Character</lightning:button>
+                    </div> 
+                    <div class="overlay">
+                        <div class="text"><p><b>Player Characters</b></p></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div >
-        <p style="text-align:center;">Name: {!v.User.Name}</p>
-        <p style="text-align:center;">Username: {!v.User.Username}</p>
-        <p style="text-align:center;">Email: {!v.User.Email}</p>
-    </div>
-    <div class="c-container">
-        <div class="header-column">
-            <p class="field-title" title="Field 1"><strong>Characters:</strong></p>
-            <br/>
-            <div class="scroll">
-                <aura:iteration items="{!v.partyList}" var="party">
-                    <lightning:card>
-                        <p style="margin: 0.35rem">Character Name: {! if(party.Name, party.Name, 'N/A') }</p>
-                        <p style="margin: 0.35rem">Party: {! if(party.Party__r.Name, party.Party__r.Name, 'N/A') }</p>
-                    </lightning:card>
-                </aura:iteration>
+            <div >
+                <p style="text-align:center;">Name: {!v.User.Name}</p>
+                <p style="text-align:center;">Username: {!v.User.Username}</p>
+                <p style="text-align:center;">Email: {!v.User.Email}</p>
             </div>
+            <div class="c-container">
+                <div class="header-column">  
+                    <p class="field-title" title="Field 1"><strong>Characters:</strong></p>
+                    <br/>
+                    <div class="scroll">
+                        <aura:iteration items="{!v.partyList}" var="party">
+                            <div class="slds-box slds-m-vertical_small">
+                                <p style="margin: 0.35rem">Character Name: {! if(party.Name, party.Name, 'N/A') }</p>
+                                <p style="margin: 0.35rem">Party: {! if(party.Party__r.Name, party.Party__r.Name, 'N/A') }</p>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </div>                 
+            </div>    
         </div>
-        <div class="header-column slds-m-top_small">
-            <lightning:button variant="brand-outline" onclick="{! c.toggleCreateForm }">Create New Character</lightning:button>
-            <div class="slds-p-around_medium ishidden" aura:id="create-form" >
-                <lightning:recordEditForm objectApiName="Character__c" >
-                    <lightning:messages />
-                    
-                    <div style="position:relative;">
-                        <a href="#" aria-describedby="help" onmouseover="{!c.toggleRaceTooltip}" onmouseout="{!c.toggleRaceTooltip}" id="race-tooltip">
-                            <span class="slds-icon_container slds-icon-utility-info">
-                                <lightning:icon iconName="utility:info"/>
-                                <span class="slds-assistive-text">Help</span>
-                            </span>
-                        </a>
+    </lightning:card>
+    
+    <!-- create character modal -->
+    <div class="ishidden-modal" aura:id="create-form-modal">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick="{! c.toggleCreateForm }" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning:icon iconName="utility:close" />
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Create a Character</h2>
+                    <p class="slds-m-top_x-small">
+                        From here you can create a character. The required fields are race and class, and at least one
+                        skill needs to be set.
+                    </p>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning:recordEditForm objectApiName="Character__c" >
+                        <lightning:messages />
                         
-                        <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left tooltip-body-wrapper ishidden" role="tooltip" id="help" aura:id="race-tooltip">
-                            <div class="slds-popover__body">
-                                The available races are: Dragonborn, Dwarf, Elf, Gnome, Half-Elf, Half-Orc, Halfling, Human, Tiefling
+                        <div style="position:relative; margin-top: 3.5rem;">
+                            <a href="#" aria-describedby="help" onmouseover="{!c.toggleRaceTooltip}" onmouseout="{!c.toggleRaceTooltip}" id="race-tooltip">
+                                <span class="slds-icon_container slds-icon-utility-info">
+                                    <lightning:icon iconName="utility:info"/>
+                                    <span class="slds-assistive-text">Help</span>
+                                </span>
+                            </a>
+                            
+                            <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left tooltip-body-wrapper ishidden" role="tooltip" id="help" aura:id="race-tooltip">
+                                <div class="slds-popover__body">
+                                    The available races are: Dragonborn, Dwarf, Elf, Gnome, Half-Elf, Half-Orc, Halfling, Human, Tiefling
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <lightning:inputField fieldName="Race__c"/>
-                    <lightning:inputField fieldName="Name"/>
-                    <div style="position:relative;">
-                        <a href="#" aria-describedby="help" onmouseover="{!c.toggleClassTooltip}" onmouseout="{!c.toggleClassTooltip}" onclick="event.preventDefault()" id="class-tooltip">
-                            <span class="slds-icon_container slds-icon-utility-info">
-                                <lightning:icon iconName="utility:info"/>
-                                <span class="slds-assistive-text">Help</span>
-                            </span>
-                        </a>
-                        <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left tooltip-body-wrapper ishidden" role="tooltip" id="help" aura:id="class-tooltip">
-                            <div class="slds-popover__body">
-                                The available classes are: Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard
+                        
+                        <lightning:inputField fieldName="Race__c"/>
+                        <lightning:inputField fieldName="Name"/>
+                        <div style="position:relative;">
+                            <a href="#" aria-describedby="help" onmouseover="{!c.toggleClassTooltip}" onmouseout="{!c.toggleClassTooltip}" onclick="event.preventDefault()" id="class-tooltip">
+                                <span class="slds-icon_container slds-icon-utility-info">
+                                    <lightning:icon iconName="utility:info"/>
+                                    <span class="slds-assistive-text">Help</span>
+                                </span>
+                            </a>
+                            <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left tooltip-body-wrapper ishidden" role="tooltip" id="help" aura:id="class-tooltip">
+                                <div class="slds-popover__body">
+                                    The available classes are: Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <lightning:inputField fieldName="Class__c"/>
-                    <div style="position:relative;">
-                        <a href="#" aria-describedby="help" onmouseover="{!c.toggleAttributesTooltip}" onmouseout="{!c.toggleAttributesTooltip}" id="attributes-tooltip">
-                            <span class="slds-icon_container slds-icon-utility-info">
-                                <lightning:icon iconName="utility:info"/>
-                                <span class="slds-assistive-text">Help</span>
-                            </span>
-                        </a>
-                        <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left stats-tooltip-body-wrapper ishidden" role="tooltip" id="help" aura:id="attributes-tooltip">
-                            <div class="slds-popover__body">
-                                The stats should be 1-20
+                        <lightning:inputField fieldName="Class__c"/>
+                        <div style="position:relative;">
+                            <a href="#" aria-describedby="help" onmouseover="{!c.toggleAttributesTooltip}" onmouseout="{!c.toggleAttributesTooltip}" id="attributes-tooltip">
+                                <span class="slds-icon_container slds-icon-utility-info">
+                                    <lightning:icon iconName="utility:info"/>
+                                    <span class="slds-assistive-text">Help</span>
+                                </span>
+                            </a>
+                            <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left stats-tooltip-body-wrapper ishidden" role="tooltip" id="help" aura:id="attributes-tooltip">
+                                <div class="slds-popover__body">
+                                    The stats should be 1-20
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <lightning:inputField fieldName="Strength__c"/>
-                    <lightning:inputField fieldName="Constitution__c"/>
-                    <lightning:inputField fieldName="Dexterity__c"/>
-                    <lightning:inputField fieldName="Wisdom__c"/>
-                    <lightning:inputField fieldName="Intelligence__c"/>
-                    <lightning:inputField fieldName="Charisma__c"/>
-                    <lightning:inputField fieldName="Party__c"/>
-                    <lightning:inputField fieldName="General_Notes__c"/>
-                    <lightning:inputField fieldName="User__c" value="{!v.User.Id}" disabled="true"/>
-                    <lightning:button type="submit"
-                                      name="Submit"
-                                      label="Create Character" class="button"
-                                      onclick="{!c.isRefreshed}"/>
-                </lightning:recordEditForm>
+                        <lightning:inputField fieldName="Strength__c"/>
+                        <lightning:inputField fieldName="Constitution__c"/>
+                        <lightning:inputField fieldName="Dexterity__c"/>
+                        <lightning:inputField fieldName="Wisdom__c"/>
+                        <lightning:inputField fieldName="Intelligence__c"/>
+                        <lightning:inputField fieldName="Charisma__c"/>
+                        <lightning:inputField fieldName="Party__c"/>
+                        <lightning:inputField fieldName="General_Notes__c"/>
+                        <lightning:inputField fieldName="User__c" value="{!v.User.Id}" disabled="true"/>
+                        <lightning:button type="submit"
+                                          name="Submit"
+                                          label="Create Character" class="button"
+                                          onclick="{!c.isRefreshed}"/>
+                    </lightning:recordEditForm>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button onclick="{! c.toggleCreateForm }" class="slds-button slds-button_text-destructive">Cancel</button>
+                </footer>
             </div>
-        </div>
-    </div>    
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" />
+    </div>
 </aura:component>
