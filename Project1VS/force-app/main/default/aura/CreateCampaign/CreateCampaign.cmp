@@ -1,0 +1,33 @@
+<aura:component controller="CreateCampaignController" implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="fields" type="String[]" default="['Campaign_Name__c', 'Summary__c', 'Status__c']" />
+    <aura:attribute name="fileType" type="String[]" default="['.png', '.jpg', '.jpeg']" />
+    <aura:attribute name="stages" type="String[]" default="['Creating', 'Uploading File', 'Done']" />
+    <aura:attribute name="stage" type="String" default="Creating" />
+    <aura:attribute name="recordId" type="String" default='' />
+    <aura:attribute name="imgSrc" type="String" default='' />
+
+    <lightning:card>
+        
+        <aura:if isTrue="{! v.stage == v.stages[0] }">
+            <lightning:recordForm
+                                  objectApiName="DnDCampaign__c"
+                                  fields="{! v.fields }"
+                                  onsuccess="{! c.handleCreateSuccess }"
+                                  />         
+        </aura:if>
+        
+        <aura:if isTrue="{! v.stage == v.stages[1] }">
+            <input 
+                   type="file" 
+                   accept="image/*"
+                   onchange="{! c.handleUploadFinished }"
+                   />  
+        </aura:if>
+        
+        <aura:if isTrue="{! v.stage == v.stages[2] }">
+        	<p>Your campaign is now created!</p>
+        </aura:if>
+        
+    </lightning:card>
+    
+</aura:component>

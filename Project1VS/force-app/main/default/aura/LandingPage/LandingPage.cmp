@@ -1,5 +1,5 @@
 <aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
-    <lightning:card title="Dungeons &amp; Dragons">
+    <lightning:card title="Welcome aboard!">
         <p class="slds-m-around_small">
             Welcome to Dungeons &amp; Dragons, the official site of the popular out-of-game DnD
             game organizer. We are committed to building a community of game-enthusiasts around the
