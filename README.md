@@ -24,3 +24,6 @@ functionality of this project.
  * Create a fresh org
  * Go to `Setup->Digital Experience->Settings` and click "Enable Digital Experiences"
  * Clone this repo and deploy it to the org via the Salesforce CLI: `sfdx force:source:deploy -x manifest/package.xml`
+
+![image](https://user-images.githubusercontent.com/52726500/131704631-38eec97c-044d-483b-97a1-1646f6f1624a.png)
+
