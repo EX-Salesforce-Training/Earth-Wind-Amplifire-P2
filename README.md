@@ -6,11 +6,10 @@ In this iteration, an experience site was added with supporting Aura components 
 functionality of this project.
 
 ## Technologies Used
+* VS Code
 * Salesforce
-* Aura
-* SLDS
-* Flow Builder
-* Workflow Rules
+  * Aura Components
+* Github
 
 ## Features
 * Join and exit campaigns
