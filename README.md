@@ -9,6 +9,10 @@ functionality of this project.
 * VS Code
 * Salesforce
   * Aura Components
+  * Flow Builder
+  * Workflow Rules
+  * SLDS
+  * Apex
 * Github
 
 ## Features
