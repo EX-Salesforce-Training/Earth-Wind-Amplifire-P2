@@ -28,3 +28,13 @@ functionality of this project.
 
 ![image](https://user-images.githubusercontent.com/52726500/131704631-38eec97c-044d-483b-97a1-1646f6f1624a.png)
 
+## Usage
+ * Once installed, you'll have to rebuild the experience site from the components provided
+ * The completed experience site should look something like this (give or take any modifications you make)
+![image](https://user-images.githubusercontent.com/52726500/131705149-cb144356-6657-4357-b11f-1abf0409a907.png)
+
+## Contributors
+ * Joseph Wilkerson
+ * Zackary Frazier
+ * Rafael Loustaunau
+ * Greg Mannerberg
